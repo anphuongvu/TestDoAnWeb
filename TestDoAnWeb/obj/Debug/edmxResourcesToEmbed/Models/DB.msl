@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="QLThiTracNghiemModelStoreContainer" CdmEntityContainer="QLThiTracNghiemEntities">
+    <EntitySetMapping Name="CauHois">
+      <EntityTypeMapping TypeName="QLThiTracNghiemModel.CauHoi">
+        <MappingFragment StoreEntitySet="CauHoi">
+          <ScalarProperty Name="MaCauHoi" ColumnName="MaCauHoi" />
+          <ScalarProperty Name="MaGiaoVien" ColumnName="MaGiaoVien" />
+          <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
+          <ScalarProperty Name="DapAnA" ColumnName="DapAnA" />
+          <ScalarProperty Name="DapAnB" ColumnName="DapAnB" />
+          <ScalarProperty Name="DapAnC" ColumnName="DapAnC" />
+          <ScalarProperty Name="DapAnD" ColumnName="DapAnD" />
+          <ScalarProperty Name="CauTraLoiDung" ColumnName="CauTraLoiDung" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DeThis">
+      <EntityTypeMapping TypeName="QLThiTracNghiemModel.DeThi">
+        <MappingFragment StoreEntitySet="DeThi">
+          <ScalarProperty Name="MaDeThi" ColumnName="MaDeThi" />
+          <ScalarProperty Name="MaMonThi" ColumnName="MaMonThi" />
+          <ScalarProperty Name="TenMonThi" ColumnName="TenMonThi" />
+          <ScalarProperty Name="NgayThi" ColumnName="NgayThi" />
+          <ScalarProperty Name="SoCauHoi" ColumnName="SoCauHoi" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DeThi_CauHoi">
+      <EntityTypeMapping TypeName="QLThiTracNghiemModel.DeThi_CauHoi">
+        <MappingFragment StoreEntitySet="DeThi_CauHoi">
+          <ScalarProperty Name="MaDeThi" ColumnName="MaDeThi" />
+          <ScalarProperty Name="MaCauHoi" ColumnName="MaCauHoi" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DiemThis">
+      <EntityTypeMapping TypeName="QLThiTracNghiemModel.DiemThi">
+        <MappingFragment StoreEntitySet="DiemThi">
+          <ScalarProperty Name="MaDiemThi" ColumnName="MaDiemThi" />
+          <ScalarProperty Name="MaHocSinh" ColumnName="MaHocSinh" />
+          <ScalarProperty Name="DiemThi1" ColumnName="DiemThi" />
+          <ScalarProperty Name="MaMonThi" ColumnName="MaMonThi" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GiaoViens">
+      <EntityTypeMapping TypeName="QLThiTracNghiemModel.GiaoVien">
+        <MappingFragment StoreEntitySet="GiaoVien">
+          <ScalarProperty Name="MaGiaoVien" ColumnName="MaGiaoVien" />
+          <ScalarProperty Name="MaTaiKhoan" ColumnName="MaTaiKhoan" />
+          <ScalarProperty Name="HoTen" ColumnName="HoTen" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HocSinhs">
+      <EntityTypeMapping TypeName="QLThiTracNghiemModel.HocSinh">
+        <MappingFragment StoreEntitySet="HocSinh">
+          <ScalarProperty Name="MaHocSinh" ColumnName="MaHocSinh" />
+          <ScalarProperty Name="MaLopHoc" ColumnName="MaLopHoc" />
+          <ScalarProperty Name="MaTaiKhoan" ColumnName="MaTaiKhoan" />
+          <ScalarProperty Name="HoTen" ColumnName="HoTen" />
+          <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
+          <ScalarProperty Name="QueQuan" ColumnName="QueQuan" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HocSinh_DeThi">
+      <EntityTypeMapping TypeName="QLThiTracNghiemModel.HocSinh_DeThi">
+        <MappingFragment StoreEntitySet="HocSinh_DeThi">
+          <ScalarProperty Name="MaHocSinh" ColumnName="MaHocSinh" />
+          <ScalarProperty Name="MaDeThi" ColumnName="MaDeThi" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LopHocs">
+      <EntityTypeMapping TypeName="QLThiTracNghiemModel.LopHoc">
+        <MappingFragment StoreEntitySet="LopHoc">
+          <ScalarProperty Name="MaLopHoc" ColumnName="MaLopHoc" />
+          <ScalarProperty Name="MaGiaoVien" ColumnName="MaGiaoVien" />
+          <ScalarProperty Name="TenLop" ColumnName="TenLop" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MonThis">
+      <EntityTypeMapping TypeName="QLThiTracNghiemModel.MonThi">
+        <MappingFragment StoreEntitySet="MonThi">
+          <ScalarProperty Name="MaMonThi" ColumnName="MaMonThi" />
+          <ScalarProperty Name="TenKiThi" ColumnName="TenKiThi" />
+          <ScalarProperty Name="NgayThi" ColumnName="NgayThi" />
+          <ScalarProperty Name="TenMonThi" ColumnName="TenMonThi" />
+          <ScalarProperty Name="TenKhoaHoc" ColumnName="TenKhoaHoc" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PhanQuyens">
+      <EntityTypeMapping TypeName="QLThiTracNghiemModel.PhanQuyen">
+        <MappingFragment StoreEntitySet="PhanQuyen">
+          <ScalarProperty Name="MaPhanQuyen" ColumnName="MaPhanQuyen" />
+          <ScalarProperty Name="TenPhanQuyen" ColumnName="TenPhanQuyen" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TaiKhoans">
+      <EntityTypeMapping TypeName="QLThiTracNghiemModel.TaiKhoan">
+        <MappingFragment StoreEntitySet="TaiKhoan">
+          <ScalarProperty Name="MaTaiKhoan" ColumnName="MaTaiKhoan" />
+          <ScalarProperty Name="MaPhanQuyen" ColumnName="MaPhanQuyen" />
+          <ScalarProperty Name="MaHocSinh" ColumnName="MaHocSinh" />
+          <ScalarProperty Name="MaGiaoVien" ColumnName="MaGiaoVien" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="NgayTaoTaiKhoan" ColumnName="NgayTaoTaiKhoan" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,55 @@
+﻿@model IEnumerable<TestDoAnWeb.Models.DeThi>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/GiangVien/Views/Shared/_GiangVienLayout.cshtml";
+}
+<div class="container" style="margin: 25px">
+    <h2>Danh sách đề thi</h2>
+
+    <div>
+        @Html.ActionLink("Thêm mới", "Create", null ,new {style = "text-decoration:none; color: #5CC6FF;"})
+    </div>
+    <table class="table">
+        <tr>
+            <th>
+                Tên môn thi
+            </th>
+            <th>
+                Ngày thi
+            </th>
+            <th>
+                Số câu hỏi
+            </th>
+            <th>
+                Tên kì thi
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TenMonThi)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NgayThi)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SoCauHoi)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MonThi.TenKiThi)
+                </td>
+                <td>
+                    @Html.ActionLink("Chỉnh sửa", "Edit", new { id = item.MaDeThi }) |
+                    @Html.ActionLink("Chi tiết", "Details", new { id = item.MaDeThi }) |
+                    @Html.ActionLink("Xóa", "Delete", new { id = item.MaDeThi })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+

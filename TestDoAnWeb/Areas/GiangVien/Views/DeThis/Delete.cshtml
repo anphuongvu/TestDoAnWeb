@@ -1,0 +1,57 @@
+﻿@model TestDoAnWeb.Models.DeThi
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/GiangVien/Views/Shared/_GiangVienLayout.cshtml";
+}
+
+<h2>Xóa đề thi</h2>
+
+<h3>Bạn có chắc chắn muốn xóa đề thi này?</h3>
+<div>
+    <h4>Đề thi</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TenMonThi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenMonThi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NgayThi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NgayThi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SoCauHoi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SoCauHoi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MonThi.TenKiThi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MonThi.TenKiThi)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Xóa" class="btn btn-default" /> |
+            @Html.ActionLink("Quay lại", "Index")
+        </div>
+    }
+</div>

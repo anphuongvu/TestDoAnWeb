@@ -1,0 +1,41 @@
+﻿@model TestDoAnWeb.Models.DeThi_CauHoi
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/GiangVien/Views/Shared/_GiangVienLayout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>DeThi_CauHoi</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CauHoi.NoiDung)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CauHoi.NoiDung)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DeThi.TenMonThi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DeThi.TenMonThi)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

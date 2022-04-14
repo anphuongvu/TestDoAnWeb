@@ -1,0 +1,44 @@
+﻿@model IEnumerable<TestDoAnWeb.Models.GiaoVien>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container" style="margin-left: 20px;">
+    <h2>Danh sách Giảng viên</h2>
+
+    <p>
+        @Html.ActionLink("Thêm mới", "Create", null, new { style = "text-decoration:none; color: #5CC6FF;" })
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.MaTaiKhoan)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HoTen)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaTaiKhoan)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HoTen)
+                </td>
+                <td>
+                    @Html.ActionLink("Chỉnh sửa", "Edit", new { id = item.MaGiaoVien }) |
+                    @Html.ActionLink("Chi tiết", "Details", new { id = item.MaGiaoVien }) |
+                    @Html.ActionLink("Xóa", "Delete", new { id = item.MaGiaoVien })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+

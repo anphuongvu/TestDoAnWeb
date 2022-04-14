@@ -1,0 +1,81 @@
+﻿@model TestDoAnWeb.Models.CauHoi
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/GiangVien/Views/Shared/_GiangVienLayout.cshtml";
+}
+
+<h2>Xóa câu hỏi</h2>
+
+<h3>Bạn có chắc muốn xóa câu hỏi này?</h3>
+<div>
+    <h4>Câu Hỏi</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NoiDung)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NoiDung)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DapAnA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DapAnA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DapAnB)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DapAnB)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DapAnC)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DapAnC)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DapAnD)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DapAnD)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CauTraLoiDung)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CauTraLoiDung)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GiaoVien.HoTen)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GiaoVien.HoTen)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Xóa" class="btn btn-default" /> |
+            @Html.ActionLink("Quay lại", "Index")
+        </div>
+    }
+</div>
