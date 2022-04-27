@@ -13,10 +13,10 @@ namespace TestDoAnWeb.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class QLThiTracNghiemEntities : DbContext
+    public partial class QLThiTracNghiemOnlEntities : DbContext
     {
-        public QLThiTracNghiemEntities()
-            : base("name=QLThiTracNghiemEntities")
+        public QLThiTracNghiemOnlEntities()
+            : base("name=QLThiTracNghiemOnlEntities")
         {
         }
     
@@ -25,16 +25,17 @@ namespace TestDoAnWeb.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<CauHoi> CauHois { get; set; }
+        public virtual DbSet<BaiLam> BaiLams { get; set; }
+        public virtual DbSet<CauHoi_LuaChon> CauHoi_LuaChon { get; set; }
+        public virtual DbSet<CauHois> CauHois { get; set; }
         public virtual DbSet<DeThi> DeThis { get; set; }
-        public virtual DbSet<DeThi_CauHoi> DeThi_CauHoi { get; set; }
-        public virtual DbSet<DiemThi> DiemThis { get; set; }
         public virtual DbSet<GiaoVien> GiaoViens { get; set; }
+        public virtual DbSet<HocSinh_KhoaHoc> HocSinh_KhoaHoc { get; set; }
         public virtual DbSet<HocSinh> HocSinhs { get; set; }
-        public virtual DbSet<HocSinh_DeThi> HocSinh_DeThi { get; set; }
-        public virtual DbSet<LopHoc> LopHocs { get; set; }
-        public virtual DbSet<MonThi> MonThis { get; set; }
+        public virtual DbSet<KhoaHoc> KhoaHocs { get; set; }
+        public virtual DbSet<LuaChon> LuaChons { get; set; }
         public virtual DbSet<PhanQuyen> PhanQuyens { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<TaiKhoan> TaiKhoans { get; set; }
     }
 }

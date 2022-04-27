@@ -9,27 +9,29 @@ using System.Web;
 using System.Web.Mvc;
 using TestDoAnWeb.Models;
 
-namespace TestDoAnWeb.Areas.GiangVien.Controllers
+namespace TestDoAnWeb.Controllers
 {
     public class DeThisController : Controller
     {
         private QLThiTracNghiemOnlEntities db = new QLThiTracNghiemOnlEntities();
 
-        // GET: GiangVien/DeThis
+        // GET: DeThis
         public async Task<ActionResult> Index()
         {
             var deThis = db.DeThis.Include(d => d.KhoaHoc);
             return View(await deThis.ToListAsync());
         }
 
-        // GET: GiangVien/DeThis/Details/5
+        // GET: DeThis/Details/5
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             DeThi deThi = await db.DeThis.FindAsync(id);
+            ViewBag.cauhois = db.CauHois.Where(item => item.MaDeThi == id).ToList();
             if (deThi == null)
             {
                 return HttpNotFound();
@@ -37,14 +39,14 @@ namespace TestDoAnWeb.Areas.GiangVien.Controllers
             return View(deThi);
         }
 
-        // GET: GiangVien/DeThis/Create
+        // GET: DeThis/Create
         public ActionResult Create()
         {
             ViewBag.MaKhoaHoc = new SelectList(db.KhoaHocs, "MaKhoaHoc", "TenKhoaHoc");
             return View();
         }
 
-        // POST: GiangVien/DeThis/Create
+        // POST: DeThis/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -62,7 +64,7 @@ namespace TestDoAnWeb.Areas.GiangVien.Controllers
             return View(deThi);
         }
 
-        // GET: GiangVien/DeThis/Edit/5
+        // GET: DeThis/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
@@ -78,7 +80,7 @@ namespace TestDoAnWeb.Areas.GiangVien.Controllers
             return View(deThi);
         }
 
-        // POST: GiangVien/DeThis/Edit/5
+        // POST: DeThis/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -95,7 +97,7 @@ namespace TestDoAnWeb.Areas.GiangVien.Controllers
             return View(deThi);
         }
 
-        // GET: GiangVien/DeThis/Delete/5
+        // GET: DeThis/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
@@ -110,7 +112,7 @@ namespace TestDoAnWeb.Areas.GiangVien.Controllers
             return View(deThi);
         }
 
-        // POST: GiangVien/DeThis/Delete/5
+        // POST: DeThis/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)

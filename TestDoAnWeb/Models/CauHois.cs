@@ -12,20 +12,25 @@ namespace TestDoAnWeb.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class LopHoc
+    public partial class CauHois
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public LopHoc()
+        public CauHois()
         {
-            this.HocSinhs = new HashSet<HocSinh>();
+            this.BaiLams = new HashSet<BaiLam>();
+            this.CauHoi_LuaChon = new HashSet<CauHoi_LuaChon>();
         }
     
-        public int MaLopHoc { get; set; }
+        public int MaCauHoi { get; set; }
+        public Nullable<int> MaDeThi { get; set; }
+        public string NoiDung { get; set; }
         public Nullable<int> MaGiaoVien { get; set; }
-        public string TenLop { get; set; }
     
-        public virtual GiaoVien GiaoVien { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<HocSinh> HocSinhs { get; set; }
+        public virtual ICollection<BaiLam> BaiLams { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CauHoi_LuaChon> CauHoi_LuaChon { get; set; }
+        public virtual DeThi DeThi { get; set; }
+        public virtual GiaoVien GiaoVien { get; set; }
     }
 }

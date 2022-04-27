@@ -1,0 +1,40 @@
+﻿@model IEnumerable<TestDoAnWeb.Models.KhoaHoc>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/GiangVien/Views/Shared/_GiangVienLayout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.MaDeThi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TenKhoaHoc)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.MaDeThi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TenKhoaHoc)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.MaKhoaHoc }) |
+            @Html.ActionLink("Details", "Details", new { id=item.MaKhoaHoc }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.MaKhoaHoc })
+        </td>
+    </tr>
+}
+
+</table>

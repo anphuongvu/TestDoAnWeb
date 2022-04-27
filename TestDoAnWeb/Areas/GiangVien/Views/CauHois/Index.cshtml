@@ -1,73 +1,46 @@
-﻿@model IEnumerable<TestDoAnWeb.Models.CauHoi>
+﻿@model IEnumerable<TestDoAnWeb.Models.CauHois>
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/GiangVien/Views/Shared/_GiangVienLayout.cshtml";
 }
 
-<div class="container" style="margin: 25px">
-    <h2>Danh sách câu hỏi</h2>
-    <br />
-    <div>
-        @Html.ActionLink("Thêm mới", "Create", null, new { @class = "btn btn-info" })
-    </div>
+<h2>Index</h2>
 
-    <br />
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NoiDung)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DeThi.TenMonThi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GiaoVien.HoTen)
+        </th>
+        <th></th>
+    </tr>
 
-    <table class="table">
-        <tr>
-            <th>
-                Nội dung
-            </th>
-            <th>
-                Đáp án A
-            </th>
-            <th>
-                Đáp án B
-            </th>
-            <th>
-                Đáp án C
-            </th>
-            <th>
-                Đáp án D
-            </th>
-            <th>
-                Câu trả lời đúng
-            </th>
-            <th></th>
-        </tr>
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NoiDung)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DeThi.TenMonThi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GiaoVien.HoTen)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.MaCauHoi }) |
+            @Html.ActionLink("Details", "Details", new { id=item.MaCauHoi }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.MaCauHoi })
+        </td>
+    </tr>
+}
 
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NoiDung)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DapAnA)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DapAnB)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DapAnC)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DapAnD)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CauTraLoiDung)
-                </td>
-                <td>
-                    @Html.ActionLink("Chỉnh sửa", "Edit", new { id = item.MaCauHoi }) |
-                    @Html.ActionLink("Chi tiết", "Details", new { id = item.MaCauHoi }) |
-                    @Html.ActionLink("Xóa", "Delete", new { id = item.MaCauHoi })
-                </td>
-            </tr>
-        }
-
-    </table>
-</div>
-
-
-
+</table>

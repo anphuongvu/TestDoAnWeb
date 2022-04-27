@@ -17,8 +17,7 @@ namespace TestDoAnWeb.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public GiaoVien()
         {
-            this.CauHois = new HashSet<CauHoi>();
-            this.LopHocs = new HashSet<LopHoc>();
+            this.CauHois = new HashSet<CauHois>();
             this.TaiKhoans = new HashSet<TaiKhoan>();
         }
     
@@ -27,9 +26,7 @@ namespace TestDoAnWeb.Models
         public string HoTen { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CauHoi> CauHois { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<LopHoc> LopHocs { get; set; }
+        public virtual ICollection<CauHois> CauHois { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TaiKhoan> TaiKhoans { get; set; }
     }

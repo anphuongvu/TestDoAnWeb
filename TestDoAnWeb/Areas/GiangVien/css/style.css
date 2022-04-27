@@ -429,3 +429,7 @@ body{
         color: var(--white)
     }
 }
+
+.form-horizontal .control-label {
+    text-align: left;
+}

@@ -1,0 +1,43 @@
+﻿@model TestDoAnWeb.Models.CauHoi_LuaChon
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/GiangVien/Views/Shared/_GiangVienLayout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>CauHoi_LuaChon</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CauTraLoi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CauTraLoi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CauHois.NoiDung)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CauHois.NoiDung)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LuaChon.NoiDung)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LuaChon.NoiDung)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -11,116 +11,107 @@ using TestDoAnWeb.Models;
 
 namespace TestDoAnWeb.Areas.GiangVien.Controllers
 {
-    public class DeThi_CauHoiController : Controller
+    public class LuaChonsController : Controller
     {
-        private QLThiTracNghiemEntities db = new QLThiTracNghiemEntities();
+        private QLThiTracNghiemOnlEntities db = new QLThiTracNghiemOnlEntities();
 
-        // GET: GiangVien/DeThi_CauHoi
+        // GET: GiangVien/LuaChons
         public async Task<ActionResult> Index()
         {
-            var deThi_CauHoi = db.DeThi_CauHoi.Include(d => d.CauHoi).Include(d => d.DeThi);
-            return View(await deThi_CauHoi.ToListAsync());
+            return View(await db.LuaChons.ToListAsync());
         }
 
-        // GET: GiangVien/DeThi_CauHoi/Details/5
+        // GET: GiangVien/LuaChons/Details/5
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DeThi_CauHoi deThi_CauHoi = await db.DeThi_CauHoi.FindAsync(id);
-            if (deThi_CauHoi == null)
+            LuaChon luaChon = await db.LuaChons.FindAsync(id);
+            if (luaChon == null)
             {
                 return HttpNotFound();
             }
-            return View(deThi_CauHoi);
+            return View(luaChon);
         }
 
-        // GET: GiangVien/DeThi_CauHoi/Create
+        // GET: GiangVien/LuaChons/Create
         public ActionResult Create()
         {
-            ViewBag.MaCauHoi = new SelectList(db.CauHois, "MaCauHoi", "NoiDung");
-            ViewBag.MaCauHoi = new SelectList(db.DeThis, "MaDeThi", "TenMonThi");
             return View();
         }
 
-        // POST: GiangVien/DeThi_CauHoi/Create
+        // POST: GiangVien/LuaChons/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "MaDeThi,MaCauHoi")] DeThi_CauHoi deThi_CauHoi)
+        public async Task<ActionResult> Create([Bind(Include = "MaLuaChon,NoiDung")] LuaChon luaChon)
         {
             if (ModelState.IsValid)
             {
-                db.DeThi_CauHoi.Add(deThi_CauHoi);
+                db.LuaChons.Add(luaChon);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.MaCauHoi = new SelectList(db.CauHois, "MaCauHoi", "NoiDung", deThi_CauHoi.MaCauHoi);
-            ViewBag.MaCauHoi = new SelectList(db.DeThis, "MaDeThi", "TenMonThi", deThi_CauHoi.MaCauHoi);
-            return View(deThi_CauHoi);
+            return View(luaChon);
         }
 
-        // GET: GiangVien/DeThi_CauHoi/Edit/5
+        // GET: GiangVien/LuaChons/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DeThi_CauHoi deThi_CauHoi = await db.DeThi_CauHoi.FindAsync(id);
-            if (deThi_CauHoi == null)
+            LuaChon luaChon = await db.LuaChons.FindAsync(id);
+            if (luaChon == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.MaCauHoi = new SelectList(db.CauHois, "MaCauHoi", "NoiDung", deThi_CauHoi.MaCauHoi);
-            ViewBag.MaCauHoi = new SelectList(db.DeThis, "MaDeThi", "TenMonThi", deThi_CauHoi.MaCauHoi);
-            return View(deThi_CauHoi);
+            return View(luaChon);
         }
 
-        // POST: GiangVien/DeThi_CauHoi/Edit/5
+        // POST: GiangVien/LuaChons/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "MaDeThi,MaCauHoi")] DeThi_CauHoi deThi_CauHoi)
+        public async Task<ActionResult> Edit([Bind(Include = "MaLuaChon,NoiDung")] LuaChon luaChon)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(deThi_CauHoi).State = EntityState.Modified;
+                db.Entry(luaChon).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewBag.MaCauHoi = new SelectList(db.CauHois, "MaCauHoi", "NoiDung", deThi_CauHoi.MaCauHoi);
-            ViewBag.MaCauHoi = new SelectList(db.DeThis, "MaDeThi", "TenMonThi", deThi_CauHoi.MaCauHoi);
-            return View(deThi_CauHoi);
+            return View(luaChon);
         }
 
-        // GET: GiangVien/DeThi_CauHoi/Delete/5
+        // GET: GiangVien/LuaChons/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DeThi_CauHoi deThi_CauHoi = await db.DeThi_CauHoi.FindAsync(id);
-            if (deThi_CauHoi == null)
+            LuaChon luaChon = await db.LuaChons.FindAsync(id);
+            if (luaChon == null)
             {
                 return HttpNotFound();
             }
-            return View(deThi_CauHoi);
+            return View(luaChon);
         }
 
-        // POST: GiangVien/DeThi_CauHoi/Delete/5
+        // POST: GiangVien/LuaChons/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            DeThi_CauHoi deThi_CauHoi = await db.DeThi_CauHoi.FindAsync(id);
-            db.DeThi_CauHoi.Remove(deThi_CauHoi);
+            LuaChon luaChon = await db.LuaChons.FindAsync(id);
+            db.LuaChons.Remove(luaChon);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }

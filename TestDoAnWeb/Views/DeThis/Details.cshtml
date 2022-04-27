@@ -1,0 +1,229 @@
+﻿@using TestDoAnWeb.Models
+@model TestDoAnWeb.Models.DeThi
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<CauHois> cauhois = ViewBag.cauhois;
+}
+
+<h2>Details</h2>
+<div class="row">
+    <div class="timer">
+        <div class="circle">
+            <svg width="150" viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg">
+                <g transform="translate(110,110)">
+                    <circle r="100" class="e-c-base" />
+                    <g transform="rotate(-90)">
+                        <circle r="100" class="e-c-progress" />
+                        <g id="e-pointer">
+                            <circle cx="100" cy="0" r="8" class="e-c-pointer" />
+                        </g>
+                    </g>
+                </g>
+            </svg>
+        </div>
+        <div class="controlls">
+            <div class="display-remain-time">00:30</div>
+            @*<button class="play" id="pause"></button>*@
+        </div>
+    </div>
+</div>
+
+<div>
+    <h4>Đề thi</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TenMonThi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenMonThi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NgayThi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NgayThi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SoCauHoi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SoCauHoi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ThoiHanDeThi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ThoiHanDeThi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ThoiGianLamBai)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ThoiGianLamBai)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.KhoaHoc.TenKhoaHoc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KhoaHoc.TenKhoaHoc)
+        </dd>
+
+    </dl>
+</div>
+
+<br />
+<hr />
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Danh sách Câu hỏi</h2>
+            @foreach (var item in cauhois)
+            {
+                <div class="row">
+                    <div class="col-md-offset-1 col-md-11">
+                        @Html.DisplayFor(modelItem => item.NoiDung)
+                    </div>
+                </div>
+                foreach (CauHoi_LuaChon chlc in item.CauHoi_LuaChon)
+                {
+                    <div class="row">
+                        <div class="form-check col-md-offset-2 col-md-10">
+                            <input class="form-check-input" type="radio" name="@Html.DisplayFor(modelItem => item.MaCauHoi)" id="@Html.DisplayFor(modelItem => item.MaCauHoi)">
+                            <label class="form-check-label" for="flexRadioDefault1">
+                                @Html.DisplayFor(modelItem => chlc.LuaChon.NoiDung)
+                            </label>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+
+    <hr />
+    <div class="form-group">
+        <div class="col-md-offset-0 col-md-12">
+            <input type="submit" value="Nộp bài" class="btn btn-info" />
+        </div>
+    </div>
+
+}
+
+<hr />
+
+
+
+
+@section Scripts {
+    <script>
+        //circle start
+        let progressBar = document.querySelector('.e-c-progress');
+        let indicator = document.getElementById('e-indicator');
+        let pointer = document.getElementById('e-pointer');
+        let length = Math.PI * 2 * 100;
+
+        progressBar.style.strokeDasharray = length;
+
+        function update(value, timePercent) {
+            var offset = - length - length * value / (timePercent);
+            progressBar.style.strokeDashoffset = offset;
+            pointer.style.transform = `rotate(${360 * value / (timePercent)}deg)`;
+        };
+
+        //circle ends
+        const displayOutput = document.querySelector('.display-remain-time')
+        //const pauseBtn = document.getElementById('pause');
+        
+
+        let intervalTimer;
+        let timeLeft;
+        let wholeTime = 12*60; // manage this to set the whole time
+        let isPaused = false;
+        let isStarted = true;
+
+
+        update(wholeTime, wholeTime); //refreshes progress bar
+        displayTimeLeft(wholeTime);
+
+        function changeWholeTime(seconds) {
+            if ((wholeTime + seconds) > 0) {
+                wholeTime += seconds;
+                update(wholeTime, wholeTime);
+            }
+        }
+
+
+        function timer(seconds) { //counts time, takes seconds
+            let remainTime = Date.now() + (seconds * 1000);
+            displayTimeLeft(seconds);
+
+            intervalTimer = setInterval(function () {
+                timeLeft = Math.round((remainTime - Date.now()) / 1000);
+                if (timeLeft < 0) {
+                    clearInterval(intervalTimer);
+                    isStarted = false;
+                    setterBtns.forEach(function (btn) {
+                        btn.disabled = false;
+                        btn.style.opacity = 1;
+                    });
+                    displayTimeLeft(wholeTime);
+                    pauseBtn.classList.remove('pause');
+                    pauseBtn.classList.add('play');
+                    return;
+                }
+                displayTimeLeft(timeLeft);
+            }, 1000);
+        }
+        timer(wholeTime);
+        //function pauseTimer(event) {
+        //    if (isStarted === false) {
+        //        timer(wholeTime);
+        //        isStarted = true;
+        //        this.classList.remove('play');
+        //        this.classList.add('pause');
+
+        //        setterBtns.forEach(function (btn) {
+        //            btn.disabled = true;
+        //            btn.style.opacity = 0.5;
+        //        });
+
+        //    } else if (isPaused) {
+        //        this.classList.remove('play');
+        //        this.classList.add('pause');
+        //        timer(timeLeft);
+        //        isPaused = isPaused ? false : true
+        //    } else {
+        //        this.classList.remove('pause');
+        //        this.classList.add('play');
+        //        clearInterval(intervalTimer);
+        //        isPaused = isPaused ? false : true;
+        //    }
+        //}
+
+        function displayTimeLeft(timeLeft) { //displays time on the input
+            let minutes = Math.floor(timeLeft / 60);
+            let seconds = timeLeft % 60;
+            let displayString = `${minutes < 10 ? '0' : ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+            displayOutput.textContent = displayString;
+            update(timeLeft, wholeTime);
+        }
+
+        //pauseBtn.addEventListener('click', pauseTimer);
+
+    </script>
+}

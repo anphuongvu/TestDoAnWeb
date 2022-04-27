@@ -12,14 +12,14 @@ namespace TestDoAnWeb.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class DiemThi
+    public partial class BaiLam
     {
-        public int MaDiemThi { get; set; }
-        public Nullable<int> MaHocSinh { get; set; }
-        public Nullable<double> DiemThi1 { get; set; }
-        public Nullable<int> MaMonThi { get; set; }
+        public int MaHocSinh { get; set; }
+        public int MaCauHoi { get; set; }
+        public Nullable<int> MaLuaChon { get; set; }
     
+        public virtual CauHois CauHois { get; set; }
         public virtual HocSinh HocSinh { get; set; }
-        public virtual MonThi MonThi { get; set; }
+        public virtual LuaChon LuaChon { get; set; }
     }
 }

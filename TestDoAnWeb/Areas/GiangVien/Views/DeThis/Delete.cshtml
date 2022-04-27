@@ -5,11 +5,11 @@
     Layout = "~/Areas/GiangVien/Views/Shared/_GiangVienLayout.cshtml";
 }
 
-<h2>Xóa đề thi</h2>
+<h2>Delete</h2>
 
-<h3>Bạn có chắc chắn muốn xóa đề thi này?</h3>
+<h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>Đề thi</h4>
+    <h4>DeThi</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -37,11 +37,27 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.MonThi.TenKiThi)
+            @Html.DisplayNameFor(model => model.ThoiHanDeThi)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.MonThi.TenKiThi)
+            @Html.DisplayFor(model => model.ThoiHanDeThi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ThoiGianLamBai)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ThoiGianLamBai)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.KhoaHoc.TenKhoaHoc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KhoaHoc.TenKhoaHoc)
         </dd>
 
     </dl>
@@ -50,8 +66,8 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Xóa" class="btn btn-default" /> |
-            @Html.ActionLink("Quay lại", "Index")
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
         </div>
     }
 </div>

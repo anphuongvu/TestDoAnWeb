@@ -1,14 +1,14 @@
-﻿@model TestDoAnWeb.Models.CauHoi
+﻿@model TestDoAnWeb.Models.CauHois
 
 @{
     ViewBag.Title = "Details";
     Layout = "~/Areas/GiangVien/Views/Shared/_GiangVienLayout.cshtml";
 }
 
-<h2>Thông tin chi tiết</h2>
+<h2>Details</h2>
 
 <div>
-    <h4>Câu hỏi</h4>
+    <h4>CauHois</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -20,43 +20,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.DapAnA)
+            @Html.DisplayNameFor(model => model.DeThi.TenMonThi)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.DapAnA)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DapAnB)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DapAnB)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DapAnC)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DapAnC)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DapAnD)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DapAnD)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CauTraLoiDung)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CauTraLoiDung)
+            @Html.DisplayFor(model => model.DeThi.TenMonThi)
         </dd>
 
         <dt>
@@ -70,6 +38,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Chỉnh sửa", "Edit", new { id = Model.MaCauHoi }) |
-    @Html.ActionLink("Quay lại", "Index")
+    @Html.ActionLink("Edit", "Edit", new { id = Model.MaCauHoi }) |
+    @Html.ActionLink("Back to List", "Index")
 </p>

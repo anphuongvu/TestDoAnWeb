@@ -11,112 +11,107 @@ using TestDoAnWeb.Models;
 
 namespace TestDoAnWeb.Areas.GiangVien.Controllers
 {
-    public class DeThisController : Controller
+    public class KhoaHocsController : Controller
     {
         private QLThiTracNghiemOnlEntities db = new QLThiTracNghiemOnlEntities();
 
-        // GET: GiangVien/DeThis
+        // GET: GiangVien/KhoaHocs
         public async Task<ActionResult> Index()
         {
-            var deThis = db.DeThis.Include(d => d.KhoaHoc);
-            return View(await deThis.ToListAsync());
+            return View(await db.KhoaHocs.ToListAsync());
         }
 
-        // GET: GiangVien/DeThis/Details/5
+        // GET: GiangVien/KhoaHocs/Details/5
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DeThi deThi = await db.DeThis.FindAsync(id);
-            if (deThi == null)
+            KhoaHoc khoaHoc = await db.KhoaHocs.FindAsync(id);
+            if (khoaHoc == null)
             {
                 return HttpNotFound();
             }
-            return View(deThi);
+            return View(khoaHoc);
         }
 
-        // GET: GiangVien/DeThis/Create
+        // GET: GiangVien/KhoaHocs/Create
         public ActionResult Create()
         {
-            ViewBag.MaKhoaHoc = new SelectList(db.KhoaHocs, "MaKhoaHoc", "TenKhoaHoc");
             return View();
         }
 
-        // POST: GiangVien/DeThis/Create
+        // POST: GiangVien/KhoaHocs/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "MaDeThi,TenMonThi,NgayThi,SoCauHoi,MaKhoaHoc,ThoiHanDeThi,ThoiGianLamBai")] DeThi deThi)
+        public async Task<ActionResult> Create([Bind(Include = "MaKhoaHoc,MaDeThi,TenKhoaHoc")] KhoaHoc khoaHoc)
         {
             if (ModelState.IsValid)
             {
-                db.DeThis.Add(deThi);
+                db.KhoaHocs.Add(khoaHoc);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.MaKhoaHoc = new SelectList(db.KhoaHocs, "MaKhoaHoc", "TenKhoaHoc", deThi.MaKhoaHoc);
-            return View(deThi);
+            return View(khoaHoc);
         }
 
-        // GET: GiangVien/DeThis/Edit/5
+        // GET: GiangVien/KhoaHocs/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DeThi deThi = await db.DeThis.FindAsync(id);
-            if (deThi == null)
+            KhoaHoc khoaHoc = await db.KhoaHocs.FindAsync(id);
+            if (khoaHoc == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.MaKhoaHoc = new SelectList(db.KhoaHocs, "MaKhoaHoc", "TenKhoaHoc", deThi.MaKhoaHoc);
-            return View(deThi);
+            return View(khoaHoc);
         }
 
-        // POST: GiangVien/DeThis/Edit/5
+        // POST: GiangVien/KhoaHocs/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "MaDeThi,TenMonThi,NgayThi,SoCauHoi,MaKhoaHoc,ThoiHanDeThi,ThoiGianLamBai")] DeThi deThi)
+        public async Task<ActionResult> Edit([Bind(Include = "MaKhoaHoc,MaDeThi,TenKhoaHoc")] KhoaHoc khoaHoc)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(deThi).State = EntityState.Modified;
+                db.Entry(khoaHoc).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewBag.MaKhoaHoc = new SelectList(db.KhoaHocs, "MaKhoaHoc", "TenKhoaHoc", deThi.MaKhoaHoc);
-            return View(deThi);
+            return View(khoaHoc);
         }
 
-        // GET: GiangVien/DeThis/Delete/5
+        // GET: GiangVien/KhoaHocs/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DeThi deThi = await db.DeThis.FindAsync(id);
-            if (deThi == null)
+            KhoaHoc khoaHoc = await db.KhoaHocs.FindAsync(id);
+            if (khoaHoc == null)
             {
                 return HttpNotFound();
             }
-            return View(deThi);
+            return View(khoaHoc);
         }
 
-        // POST: GiangVien/DeThis/Delete/5
+        // POST: GiangVien/KhoaHocs/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            DeThi deThi = await db.DeThis.FindAsync(id);
-            db.DeThis.Remove(deThi);
+            KhoaHoc khoaHoc = await db.KhoaHocs.FindAsync(id);
+            db.KhoaHocs.Remove(khoaHoc);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }

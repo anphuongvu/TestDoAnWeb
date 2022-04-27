@@ -1,0 +1,46 @@
+﻿@model IEnumerable<TestDoAnWeb.Models.CauHoi_LuaChon>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/GiangVien/Views/Shared/_GiangVienLayout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CauTraLoi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CauHois.NoiDung)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LuaChon.NoiDung)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CauTraLoi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CauHois.NoiDung)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LuaChon.NoiDung)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

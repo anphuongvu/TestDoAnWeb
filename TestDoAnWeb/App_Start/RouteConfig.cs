@@ -14,9 +14,24 @@ namespace TestDoAnWeb
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                "GiangVienPage",
+                "GiangVien/{controller}/{action}",
+                new { area = "GiangVien", controller = "Home", action = "Index" },
+                new[] { typeof(Areas.Admin.Controllers.HomeController).Namespace }
+            );
+
+            routes.MapRoute(
+                "AdminPage",
+                "Admin/{controller}/{action}",
+                new { area = "Admin", controller = "Home", action = "Index" },
+                new[] { typeof(Areas.Admin.Controllers.HomeController).Namespace }
+            );
+
+            routes.MapRoute(
                 name: "Default",
-                url: "{controller}/{action}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                url: "{controller}/{action}/{id}",
+                new { controller = "Home", action = "Index", id = UrlParameter.Optional },
+                new[] { "TestDoAnWeb.Controllers" }
             );
         }
     }

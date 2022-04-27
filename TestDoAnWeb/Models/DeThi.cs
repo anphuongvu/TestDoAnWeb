@@ -17,20 +17,19 @@ namespace TestDoAnWeb.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public DeThi()
         {
-            this.DeThi_CauHoi = new HashSet<DeThi_CauHoi>();
-            this.HocSinh_DeThi = new HashSet<HocSinh_DeThi>();
+            this.CauHois = new HashSet<CauHois>();
         }
     
         public int MaDeThi { get; set; }
-        public Nullable<int> MaMonThi { get; set; }
         public string TenMonThi { get; set; }
-        public Nullable<System.DateTime> NgayThi { get; set; }
+        public System.DateTime NgayThi { get; set; }
         public Nullable<int> SoCauHoi { get; set; }
+        public Nullable<int> MaKhoaHoc { get; set; }
+        public System.DateTime ThoiHanDeThi { get; set; }
+        public int ThoiGianLamBai { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DeThi_CauHoi> DeThi_CauHoi { get; set; }
-        public virtual MonThi MonThi { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<HocSinh_DeThi> HocSinh_DeThi { get; set; }
+        public virtual ICollection<CauHois> CauHois { get; set; }
+        public virtual KhoaHoc KhoaHoc { get; set; }
     }
 }

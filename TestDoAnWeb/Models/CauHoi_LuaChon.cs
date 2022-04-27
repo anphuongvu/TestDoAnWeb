@@ -12,12 +12,13 @@ namespace TestDoAnWeb.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class DeThi_CauHoi
+    public partial class CauHoi_LuaChon
     {
-        public int MaDeThi { get; set; }
         public int MaCauHoi { get; set; }
+        public int MaLuaChon { get; set; }
+        public bool CauTraLoi { get; set; }
     
-        public virtual CauHoi CauHoi { get; set; }
-        public virtual DeThi DeThi { get; set; }
+        public virtual CauHois CauHois { get; set; }
+        public virtual LuaChon LuaChon { get; set; }
     }
 }

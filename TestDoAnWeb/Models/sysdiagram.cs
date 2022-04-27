@@ -12,12 +12,12 @@ namespace TestDoAnWeb.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class HocSinh_DeThi
+    public partial class sysdiagram
     {
-        public int MaHocSinh { get; set; }
-        public Nullable<int> MaDeThi { get; set; }
-    
-        public virtual DeThi DeThi { get; set; }
-        public virtual HocSinh HocSinh { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

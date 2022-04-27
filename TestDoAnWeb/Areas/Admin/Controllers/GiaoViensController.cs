@@ -12,7 +12,7 @@ namespace TestDoAnWeb.Areas.Admin.Controllers
 {
     public class GiaoViensController : Controller
     {
-        private QLThiTracNghiemEntities db = new QLThiTracNghiemEntities();
+        private QLThiTracNghiemOnlEntities db = new QLThiTracNghiemOnlEntities();
 
         // GET: Admin/GiaoViens
         public ActionResult Index()

@@ -12,24 +12,25 @@ namespace TestDoAnWeb.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class MonThi
+    public partial class KhoaHoc
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public MonThi()
+        public KhoaHoc()
         {
             this.DeThis = new HashSet<DeThi>();
-            this.DiemThis = new HashSet<DiemThi>();
+            this.HocSinh_KhoaHoc = new HashSet<HocSinh_KhoaHoc>();
+            this.HocSinhs = new HashSet<HocSinh>();
         }
     
-        public int MaMonThi { get; set; }
-        public string TenKiThi { get; set; }
-        public Nullable<System.DateTime> NgayThi { get; set; }
-        public string TenMonThi { get; set; }
+        public int MaKhoaHoc { get; set; }
+        public Nullable<int> MaDeThi { get; set; }
         public string TenKhoaHoc { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DeThi> DeThis { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DiemThi> DiemThis { get; set; }
+        public virtual ICollection<HocSinh_KhoaHoc> HocSinh_KhoaHoc { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<HocSinh> HocSinhs { get; set; }
     }
 }

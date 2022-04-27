@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
@@ -12,33 +13,34 @@ namespace TestDoAnWeb.Areas.GiangVien.Controllers
 {
     public class CauHoisController : Controller
     {
-        private QLThiTracNghiemEntities db = new QLThiTracNghiemEntities();
+        private QLThiTracNghiemOnlEntities db = new QLThiTracNghiemOnlEntities();
 
         // GET: GiangVien/CauHois
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            var cauHois = db.CauHois.Include(c => c.GiaoVien);
-            return View(cauHois.ToList());
+            var cauHois = db.CauHois.Include(c => c.DeThi).Include(c => c.GiaoVien);
+            return View(await cauHois.ToListAsync());
         }
 
         // GET: GiangVien/CauHois/Details/5
-        public ActionResult Details(int? id)
+        public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CauHoi cauHoi = db.CauHois.Find(id);
-            if (cauHoi == null)
+            CauHois cauHois = await db.CauHois.FindAsync(id);
+            if (cauHois == null)
             {
                 return HttpNotFound();
             }
-            return View(cauHoi);
+            return View(cauHois);
         }
 
         // GET: GiangVien/CauHois/Create
         public ActionResult Create()
         {
+            ViewBag.MaDeThi = new SelectList(db.DeThis, "MaDeThi", "TenMonThi");
             ViewBag.MaGiaoVien = new SelectList(db.GiaoViens, "MaGiaoVien", "HoTen");
             return View();
         }
@@ -48,33 +50,35 @@ namespace TestDoAnWeb.Areas.GiangVien.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "MaCauHoi,MaGiaoVien,NoiDung,DapAnA,DapAnB,DapAnC,DapAnD,CauTraLoiDung")] CauHoi cauHoi)
+        public async Task<ActionResult> Create([Bind(Include = "MaCauHoi,MaDeThi,NoiDung,MaGiaoVien")] CauHois cauHois)
         {
             if (ModelState.IsValid)
             {
-                db.CauHois.Add(cauHoi);
-                db.SaveChanges();
+                db.CauHois.Add(cauHois);
+                await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.MaGiaoVien = new SelectList(db.GiaoViens, "MaGiaoVien", "HoTen", cauHoi.MaGiaoVien);
-            return View(cauHoi);
+            ViewBag.MaDeThi = new SelectList(db.DeThis, "MaDeThi", "TenMonThi", cauHois.MaDeThi);
+            ViewBag.MaGiaoVien = new SelectList(db.GiaoViens, "MaGiaoVien", "HoTen", cauHois.MaGiaoVien);
+            return View(cauHois);
         }
 
         // GET: GiangVien/CauHois/Edit/5
-        public ActionResult Edit(int? id)
+        public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CauHoi cauHoi = db.CauHois.Find(id);
-            if (cauHoi == null)
+            CauHois cauHois = await db.CauHois.FindAsync(id);
+            if (cauHois == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.MaGiaoVien = new SelectList(db.GiaoViens, "MaGiaoVien", "HoTen", cauHoi.MaGiaoVien);
-            return View(cauHoi);
+            ViewBag.MaDeThi = new SelectList(db.DeThis, "MaDeThi", "TenMonThi", cauHois.MaDeThi);
+            ViewBag.MaGiaoVien = new SelectList(db.GiaoViens, "MaGiaoVien", "HoTen", cauHois.MaGiaoVien);
+            return View(cauHois);
         }
 
         // POST: GiangVien/CauHois/Edit/5
@@ -82,41 +86,42 @@ namespace TestDoAnWeb.Areas.GiangVien.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "MaCauHoi,MaGiaoVien,NoiDung,DapAnA,DapAnB,DapAnC,DapAnD,CauTraLoiDung")] CauHoi cauHoi)
+        public async Task<ActionResult> Edit([Bind(Include = "MaCauHoi,MaDeThi,NoiDung,MaGiaoVien")] CauHois cauHois)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(cauHoi).State = EntityState.Modified;
-                db.SaveChanges();
+                db.Entry(cauHois).State = EntityState.Modified;
+                await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewBag.MaGiaoVien = new SelectList(db.GiaoViens, "MaGiaoVien", "HoTen", cauHoi.MaGiaoVien);
-            return View(cauHoi);
+            ViewBag.MaDeThi = new SelectList(db.DeThis, "MaDeThi", "TenMonThi", cauHois.MaDeThi);
+            ViewBag.MaGiaoVien = new SelectList(db.GiaoViens, "MaGiaoVien", "HoTen", cauHois.MaGiaoVien);
+            return View(cauHois);
         }
 
         // GET: GiangVien/CauHois/Delete/5
-        public ActionResult Delete(int? id)
+        public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CauHoi cauHoi = db.CauHois.Find(id);
-            if (cauHoi == null)
+            CauHois cauHois = await db.CauHois.FindAsync(id);
+            if (cauHois == null)
             {
                 return HttpNotFound();
             }
-            return View(cauHoi);
+            return View(cauHois);
         }
 
         // POST: GiangVien/CauHois/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            CauHoi cauHoi = db.CauHois.Find(id);
-            db.CauHois.Remove(cauHoi);
-            db.SaveChanges();
+            CauHois cauHois = await db.CauHois.FindAsync(id);
+            db.CauHois.Remove(cauHois);
+            await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
 
