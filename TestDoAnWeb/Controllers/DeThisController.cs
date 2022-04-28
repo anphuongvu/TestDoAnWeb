@@ -16,6 +16,7 @@ namespace TestDoAnWeb.Controllers
         private QLThiTracNghiemOnlEntities db = new QLThiTracNghiemOnlEntities();
 
         // GET: DeThis
+
         public async Task<ActionResult> Index()
         {
             var deThis = db.DeThis.Include(d => d.KhoaHoc);
