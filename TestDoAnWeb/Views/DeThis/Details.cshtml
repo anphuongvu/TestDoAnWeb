@@ -93,7 +93,7 @@
     <div class="row">
         <div class="col-md-12">
             <h2>Danh sách Câu hỏi</h2>
-            @foreach (var item in cauhois)
+            @*@foreach (var item in cauhois)
             {
                 <div class="row">
                     <div class="col-md-offset-1 col-md-11">
@@ -111,7 +111,71 @@
                         </div>
                     </div>
                 }
+            }*@
+
+            @for (int i = 0; i < cauhois.Count; i++)
+            {
+
+                //SortData is a javascript function which is used for retrieving next or previous data according to page number
+                if (i == ViewBag.quest_idx)
+                {
+                    <div class="row" id="quest_@Html.DisplayFor(modelItem => cauhois[i].MaCauHoi)">
+                        <div class="col-md-offset-1 col-md-11">
+                            @Html.DisplayFor(modelItem => cauhois[i].NoiDung)
+                        </div>
+
+                        @foreach (CauHoi_LuaChon chlc in cauhois[i].CauHoi_LuaChon)
+                        {
+                            <div class="row">
+                                <div class="form-check col-md-offset-2 col-md-10">
+                                    <input class="form-check-input" type="radio" name="@Html.DisplayFor(modelItem => cauhois[i].MaCauHoi)" id="@Html.DisplayFor(modelItem => cauhois[i].MaCauHoi)">
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                        @Html.DisplayFor(modelItem => chlc.LuaChon.NoiDung)
+                                    </label>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
+                else
+                {
+                    <div class="row hidden" id="quest_@Html.DisplayFor(modelItem => cauhois[i].MaCauHoi)">
+                        <div class="col-md-offset-1 col-md-11">
+                            @Html.DisplayFor(modelItem => cauhois[i].NoiDung)
+                        </div>
+                        
+                        @foreach (CauHoi_LuaChon chlc in cauhois[i].CauHoi_LuaChon)
+                        {
+                            <div class="form-check col-md-offset-2 col-md-10">
+                                <input class="form-check-input" type="radio" name="@Html.DisplayFor(modelItem => cauhois[i].MaCauHoi)" id="@Html.DisplayFor(modelItem => cauhois[i].MaCauHoi)">
+                                <label class="form-check-label" for="flexRadioDefault1">
+                                    @Html.DisplayFor(modelItem => chlc.LuaChon.NoiDung)
+                                </label>
+                            </div>
+                        }
+                    </div>
+                }
+
             }
+
+            <div class="row" id="SHowButton">
+                @for (int i = 1; i < cauhois.Count; i++)
+                {
+                    <input class="hidden btn btn-info" type="button" id="pre_btn_@cauhois[i].MaCauHoi" value="Trước" onclick="ShowPreData(@cauhois[i].MaCauHoi)" />
+
+                }
+                @for (int i = 0; i < cauhois.Count-1; i++)
+                {
+                    if (i == ViewBag.quest_idx)
+                    {
+                        <input class="btn btn-info" type="button" id="next_btn_@cauhois[i].MaCauHoi" value="Tiếp" onclick="ShowNextData(@cauhois[i].MaCauHoi)" />
+                    }
+                    else
+                    {
+                        <input class="hidden btn btn-info" type="button" id="next_btn_@cauhois[i].MaCauHoi" value="Tiếp" onclick="ShowNextData(@cauhois[i].MaCauHoi)" />
+                    }
+                }
+            </div>
         </div>
     </div>
 
@@ -225,5 +289,42 @@
 
         //pauseBtn.addEventListener('click', pauseTimer);
 
+        function ShowNextData(maCauHoi)  //number will get the clicked button's number
+        {
+            
+            var current_quest = $("#quest_" + maCauHoi);
+            var next_quest = $("#quest_" + (maCauHoi + 1));
+            current_quest.addClass("hidden");
+            next_quest.removeClass("hidden");
+
+            var current_next_btn = $("#next_btn_" + maCauHoi);
+            var next_next_btn = $("#next_btn_" + (maCauHoi + 1));
+            current_next_btn.addClass("hidden");
+            next_next_btn.removeClass("hidden");
+
+            var current_pre_btn = $("#pre_btn_" + (maCauHoi));
+            var next_pre_btn = $("#pre_btn_" + (maCauHoi+1));
+            current_pre_btn.addClass("hidden");
+            next_pre_btn.removeClass("hidden");
+        }
+
+        function ShowPreData(maCauHoi)  //number will get the clicked button's number
+        {
+
+            var current_quest = $("#quest_" + maCauHoi);
+            var pre_quest = $("#quest_" + (maCauHoi - 1));
+            current_quest.addClass("hidden");
+            pre_quest.removeClass("hidden");
+
+            var current_next_btn = $("#next_btn_" + maCauHoi);
+            var pre_next_btn = $("#next_btn_" + (maCauHoi - 1));
+            current_next_btn.addClass("hidden");
+            pre_next_btn.removeClass("hidden");
+
+            var current_pre_btn = $("#pre_btn_" + (maCauHoi));
+            var pre_pre_btn = $("#pre_btn_" + (maCauHoi - 1));
+            current_pre_btn.addClass("hidden");
+            pre_pre_btn.removeClass("hidden");
+        }
     </script>
 }

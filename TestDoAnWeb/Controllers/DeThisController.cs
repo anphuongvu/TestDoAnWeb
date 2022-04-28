@@ -32,6 +32,7 @@ namespace TestDoAnWeb.Controllers
 
             DeThi deThi = await db.DeThis.FindAsync(id);
             ViewBag.cauhois = db.CauHois.Where(item => item.MaDeThi == id).ToList();
+            ViewBag.quest_idx = 0;
             if (deThi == null)
             {
                 return HttpNotFound();
