@@ -5,6 +5,87 @@
 .navbar-inverse {
     background-color: #5CC6FF;
 }
+@import url('https://fonts.googleapis.com/css2?family=Sen:wght@400;700;800&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Sen', sans-serif;
+}
+
+nav {
+    color: #f2f2f2;
+    background: #5CC6FF;
+    padding: 15px 70px 10px 70px;
+    border: none;
+}
+nav ul {
+    display: flex;
+    list-style: none;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+}
+nav ul li a {
+    color: #f2f2f2;
+    font-size: 18px;
+    text-decoration: none;
+}
+nav ul li a:hover {
+    color: #0000FF;
+}
+nav ul li.logo {
+    flex: 1;
+    font-size: 25px;
+    font-weight: 700;
+}
+
+nav ul div.items {
+    color: #f2f2f2;
+    padding: 0 25px;
+    display: inline-flex;
+}
+nav ul div.items a {
+    text-decoration: none;
+    font-size: 18px;
+    padding: 0 12px;
+}
+nav ul .search-icon {
+    height: 40px;
+    width: 240px;
+    display: flex;
+    background-color: #f2f2f2;
+    border-radius: 5px;
+    margin-right: 20px;
+}
+nav ul .search-icon input {
+    height: 100%;
+    width: 200px;
+    border: none;
+    outline: none;
+    padding: 0 10px;
+    font-size: 16px;
+    color: #000;
+    border-radius: 5px 0 0 5px;
+}
+nav ul .search-icon .icon {
+    height: 100%;
+    width: 40px;
+    line-height: 40px;
+    text-align: center;
+    background: #93989b;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+}
+nav ul .search-icon .icon:hover {
+    background: #0000FF;
+}
+nav ul .search-icon .icon span {
+    color: #f2f2f2;
+    font-size: 18px;
+    align-content: center;
+}
 
 @import url('https://fonts.googleapis.com/css?family=Roboto:100,300');
 
