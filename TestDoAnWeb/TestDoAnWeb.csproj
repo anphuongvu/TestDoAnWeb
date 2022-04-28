@@ -225,6 +225,13 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="img\chuga.png" />
+    <Content Include="img\decade.jpg" />
+    <Content Include="img\hopie.jpg" />
+    <Content Include="img\jhope.png" />
+    <Content Include="img\rose.jpg" />
+    <Content Include="img\suga.jpeg" />
+    <Content Include="img\v.jpeg" />
     <Content Include="Models\DB.edmx.sql" />
     <Content Include="Models\ThiTN.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

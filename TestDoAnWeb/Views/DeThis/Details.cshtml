@@ -6,173 +6,233 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     List<CauHois> cauhois = ViewBag.cauhois;
 }
+<style>
+    .container-fuild {
+        margin-top: 10px;
+    }
 
-<h2>Details</h2>
-<div class="row">
-    <div class="timer">
-        <div class="circle">
-            <svg width="150" viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg">
-                <g transform="translate(110,110)">
-                    <circle r="100" class="e-c-base" />
-                    <g transform="rotate(-90)">
-                        <circle r="100" class="e-c-progress" />
-                        <g id="e-pointer">
-                            <circle cx="100" cy="0" r="8" class="e-c-pointer" />
-                        </g>
-                    </g>
-                </g>
-            </svg>
-        </div>
-        <div class="controlls">
-            <div class="display-remain-time">00:30</div>
-        </div>
-    </div>
-</div>
+    .layout {
+        height: 650px;
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        /* grid-column-gap: 20px; */
+    }
 
-<div>
-    <h4>Đề thi</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.TenMonThi)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TenMonThi)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.NgayThi)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.NgayThi)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.SoCauHoi)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.SoCauHoi)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ThoiHanDeThi)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ThoiHanDeThi)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ThoiGianLamBai)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ThoiGianLamBai)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.KhoaHoc.TenKhoaHoc)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.KhoaHoc.TenKhoaHoc)
-        </dd>
-
-    </dl>
-</div>
-
-<br />
-<hr />
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    <div class="row">
-        <div class="col-md-12">
-            <h2>Câu hỏi</h2>
-
-            @for (int i = 0; i < cauhois.Count; i++)
-            {
-                
-                //SortData is a javascript function which is used for retrieving next or previous data according to page number
-                if (i == ViewBag.quest_idx)
-                {
-                    <div class="row" id="quest_@Html.DisplayFor(modelItem => cauhois[i].MaCauHoi)">
-                        <h4>Câu hỏi @(i+1):</h4>
-                        <div class="col-md-offset-1 col-md-11">
-                            @Html.DisplayFor(modelItem => cauhois[i].NoiDung)
+    .layout-item {
+        margin-left: 10px;
+        margin-right: 10px;
+        border-radius: 10px;
+        background-color: #5CC6FF;
+        border: 1px solid rgb(6, 218, 255);
+    }
+    .thoigian {
+        font-size: 16px;
+        height: 200px;
+        margin: 10px;
+        border-radius: 20px;
+        background-color: #ffffff;
+    }
+    .thoigian h4 {
+        margin: 20px 0 0 20px;
+    }
+    .infoBaiThi{
+        font-size: 16px;
+        height: 400px;
+        margin: 10px;
+        border-radius: 20px;
+        background-color: #ffffff;
+    }
+    .infoBaiThi h4 {
+        margin: 20px 0 0 20px;
+    }
+    .cauhoi {
+        font-size: 16px;
+        height: 600px;
+        margin: 15px;
+        border-radius: 20px;
+        background-color: #ffffff;
+    }
+    .cauhoi h4 {
+        margin: 20px 0 0 20px;
+    }
+</style>
+<div class="container-fuild">
+    <div class="layout">
+        <div class="layout-item">
+            <div class="thoigian">
+                <h4>Thời gian</h4>
+                <div class="row">
+                    <div class="timer">
+                        <div class="circle">
+                            <svg width="150" viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg">
+                                <g transform="translate(110,110)">
+                                    <circle r="100" class="e-c-base" />
+                                    <g transform="rotate(-90)">
+                                        <circle r="100" class="e-c-progress" />
+                                        <g id="e-pointer">
+                                            <circle cx="100" cy="0" r="8" class="e-c-pointer" />
+                                        </g>
+                                    </g>
+                                </g>
+                            </svg>
                         </div>
-
-                        @foreach (CauHoi_LuaChon chlc in cauhois[i].CauHoi_LuaChon)
-                        {
-                            <div class="row">
-                                <div class="form-check col-md-offset-2 col-md-10">
-                                    <input class="form-check-input" type="radio" name="@Html.DisplayFor(modelItem => cauhois[i].MaCauHoi)" id="@Html.DisplayFor(modelItem => cauhois[i].MaCauHoi)">
-                                    <label class="form-check-label" for="flexRadioDefault1">
-                                        @Html.DisplayFor(modelItem => chlc.LuaChon.NoiDung)
-                                    </label>
-                                </div>
-                            </div>
-                        }
-                    </div>
-                }
-                else
-                {
-                    <div class="row hidden" id="quest_@Html.DisplayFor(modelItem => cauhois[i].MaCauHoi)">
-                        <h4>Câu hỏi @(i+1):</h4>
-                        <div class="col-md-offset-1 col-md-11">
-                            @Html.DisplayFor(modelItem => cauhois[i].NoiDung)
+                        <div class="controlls">
+                            <div class="display-remain-time">00:30</div>
                         </div>
-
-                        @foreach (CauHoi_LuaChon chlc in cauhois[i].CauHoi_LuaChon)
-                        {
-                            <div class="form-check col-md-offset-2 col-md-10">
-                                <input class="form-check-input" type="radio" name="@Html.DisplayFor(modelItem => cauhois[i].MaCauHoi)" id="@Html.DisplayFor(modelItem => cauhois[i].MaCauHoi)">
-                                <label class="form-check-label" for="flexRadioDefault1">
-                                    @Html.DisplayFor(modelItem => chlc.LuaChon.NoiDung)
-                                </label>
-                            </div>
-                        }
                     </div>
-                }
+                </div>
+            </div>
+            <div class="infoBaiThi">
+                <h4 style="margin: 10px">Thông tin đề thi</h4>
+                <div>
+                    <dl class="dl-horizontal">
+                        <dt>
+                            Tên môn thi: 
+                            @*@Html.DisplayNameFor(model => model.TenMonThi)*@
+                        </dt>
 
-            }
+                        <dd>
+                            @Html.DisplayFor(model => model.TenMonThi)
+                        </dd>
 
-            <div class="row text-right" id="SHowButton">
-                @for (int i = 1; i < cauhois.Count; i++)
+                        <dt>
+                            Ngày thi: 
+                            @*@Html.DisplayNameFor(model => model.NgayThi)*@
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.NgayThi)
+                        </dd>
+
+                        <dt>
+                            Số câu hỏi: 
+                            @*@Html.DisplayNameFor(model => model.SoCauHoi)*@
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.SoCauHoi)
+                        </dd>
+
+                        <dt>
+                            Thời hạn đề thi: 
+                            @*@Html.DisplayNameFor(model => model.ThoiHanDeThi)*@
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.ThoiHanDeThi)
+                        </dd>
+
+                        <dt>
+                            Thời gian làm bài: 
+                            @*@Html.DisplayNameFor(model => model.ThoiGianLamBai)*@
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.ThoiGianLamBai)
+                        </dd>
+
+                        <dt>
+                            Tên khóa học: 
+                            @*@Html.DisplayNameFor(model => model.KhoaHoc.TenKhoaHoc)*@
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.KhoaHoc.TenKhoaHoc)
+                        </dd>
+
+                    </dl>
+                </div>
+            </div>
+        </div>
+        <div class="layout-item">
+            <div class="cauhoi">
+                <h4>Bài thi</h4>
+                @using (Html.BeginForm())
                 {
-                    <input class="hidden btn btn-info" type="button" id="pre_btn_@cauhois[i].MaCauHoi" value="Trước" onclick="ShowPreData(@cauhois[i].MaCauHoi)" />
+                    @Html.AntiForgeryToken()
+                    <div class="row">
+                        <div class="col-md-12">
+                            @for (int i = 0; i < cauhois.Count; i++)
+                            {
 
-                }
-                @for (int i = 0; i < cauhois.Count - 1; i++)
-                {
-                    if (i == ViewBag.quest_idx)
-                    {
-                        <input class="btn btn-info" type="button" id="next_btn_@cauhois[i].MaCauHoi" value="Tiếp" onclick="ShowNextData(@cauhois[i].MaCauHoi)" />
-                    }
-                    else
-                    {
-                        <input class="hidden btn btn-info" type="button" id="next_btn_@cauhois[i].MaCauHoi" value="Tiếp" onclick="ShowNextData(@cauhois[i].MaCauHoi)" />
-                    }
+                                //SortData is a javascript function which is used for retrieving next or previous data according to page number
+                                if (i == ViewBag.quest_idx)
+                                {
+                                    <div class="row" id="quest_@Html.DisplayFor(modelItem => cauhois[i].MaCauHoi)">
+                                        <h4>Câu hỏi @(i+1):</h4>
+                                        <div class="col-md-offset-1 col-md-11">
+                                            @Html.DisplayFor(modelItem => cauhois[i].NoiDung)
+                                        </div>
+
+                                        @foreach (CauHoi_LuaChon chlc in cauhois[i].CauHoi_LuaChon)
+                                        {
+                                            <div class="row">
+                                                <div class="form-check col-md-offset-2 col-md-10">
+                                                    <input class="form-check-input" type="radio" name="@Html.DisplayFor(modelItem => cauhois[i].MaCauHoi)" id="@Html.DisplayFor(modelItem => cauhois[i].MaCauHoi)">
+                                                    <label class="form-check-label" for="flexRadioDefault1">
+                                                        @Html.DisplayFor(modelItem => chlc.LuaChon.NoiDung)
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="row hidden" id="quest_@Html.DisplayFor(modelItem => cauhois[i].MaCauHoi)">
+                                        <h4>Câu hỏi @(i+1):</h4>
+                                        <div class="col-md-offset-1 col-md-11">
+                                            @Html.DisplayFor(modelItem => cauhois[i].NoiDung)
+                                        </div>
+
+                                        @foreach (CauHoi_LuaChon chlc in cauhois[i].CauHoi_LuaChon)
+                                        {
+                                            <div class="form-check col-md-offset-2 col-md-10">
+                                                <input class="form-check-input" type="radio" name="@Html.DisplayFor(modelItem => cauhois[i].MaCauHoi)" id="@Html.DisplayFor(modelItem => cauhois[i].MaCauHoi)">
+                                                <label class="form-check-label" for="flexRadioDefault1">
+                                                    @Html.DisplayFor(modelItem => chlc.LuaChon.NoiDung)
+                                                </label>
+                                            </div>
+                                        }
+                                    </div>
+                                }
+
+                            }
+
+                            <div class="row text-right" id="SHowButton">
+                                @for (int i = 1; i < cauhois.Count; i++)
+                                {
+                                    <input class="hidden btn btn-info" type="button" id="pre_btn_@cauhois[i].MaCauHoi" value="Trước" onclick="ShowPreData(@cauhois[i].MaCauHoi)" />
+
+                                }
+                                @for (int i = 0; i < cauhois.Count - 1; i++)
+                                {
+                                    if (i == ViewBag.quest_idx)
+                                    {
+                                        <input class="btn btn-info" type="button" id="next_btn_@cauhois[i].MaCauHoi" value="Tiếp" onclick="ShowNextData(@cauhois[i].MaCauHoi)" />
+                                    }
+                                    else
+                                    {
+                                        <input class="hidden btn btn-info" type="button" id="next_btn_@cauhois[i].MaCauHoi" value="Tiếp" onclick="ShowNextData(@cauhois[i].MaCauHoi)" />
+                                    }
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr />
+                    <div class="form-group">
+                        <div class="col-md-offset-0 col-md-12">
+                            <input type="submit" value="Nộp bài" class="btn btn-info" />
+                        </div>
+                    </div>
+
                 }
             </div>
         </div>
     </div>
-
-    <hr />
-    <div class="form-group">
-        <div class="col-md-offset-0 col-md-12">
-            <input type="submit" value="Nộp bài" class="btn btn-info" />
-        </div>
-    </div>
-
-}
-
-<hr />
-
-
+</div>
+<!--Trang làm bài thi-->
 
 
 @section Scripts {
