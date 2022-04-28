@@ -133,61 +133,67 @@
     <Compile Include="Areas\Admin\Controllers\GiaoViensController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\GiangVien\Controllers\CauHoisController.cs" />
+    <Compile Include="Areas\GiangVien\Controllers\CauHoi_LuaChonController.cs" />
     <Compile Include="Areas\GiangVien\Controllers\DeThisController.cs" />
-    <Compile Include="Areas\GiangVien\Controllers\DeThi_CauHoiController.cs" />
     <Compile Include="Areas\GiangVien\Controllers\HomeController.cs" />
+    <Compile Include="Areas\GiangVien\Controllers\KhoaHocsController.cs" />
+    <Compile Include="Areas\GiangVien\Controllers\LuaChonsController.cs" />
     <Compile Include="Areas\GiangVien\GiangVienAreaRegistration.cs" />
+    <Compile Include="Controllers\DeThisController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\CauHoi.cs">
-      <DependentUpon>DB.tt</DependentUpon>
+    <Compile Include="Models\BaiLam.cs">
+      <DependentUpon>ThiTN.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DB.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DB.Context.tt</DependentUpon>
+    <Compile Include="Models\CauHois.cs">
+      <DependentUpon>ThiTN.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DB.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DB.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DB.edmx</DependentUpon>
+    <Compile Include="Models\CauHoi_LuaChon.cs">
+      <DependentUpon>ThiTN.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DeThi.cs">
-      <DependentUpon>DB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DeThi_CauHoi.cs">
-      <DependentUpon>DB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DiemThi.cs">
-      <DependentUpon>DB.tt</DependentUpon>
+      <DependentUpon>ThiTN.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\GiaoVien.cs">
-      <DependentUpon>DB.tt</DependentUpon>
+      <DependentUpon>ThiTN.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\HocSinh.cs">
-      <DependentUpon>DB.tt</DependentUpon>
+      <DependentUpon>ThiTN.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\HocSinh_DeThi.cs">
-      <DependentUpon>DB.tt</DependentUpon>
+    <Compile Include="Models\HocSinh_KhoaHoc.cs">
+      <DependentUpon>ThiTN.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\LopHoc.cs">
-      <DependentUpon>DB.tt</DependentUpon>
+    <Compile Include="Models\KhoaHoc.cs">
+      <DependentUpon>ThiTN.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\MonThi.cs">
-      <DependentUpon>DB.tt</DependentUpon>
+    <Compile Include="Models\LuaChon.cs">
+      <DependentUpon>ThiTN.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PhanQuyen.cs">
-      <DependentUpon>DB.tt</DependentUpon>
+      <DependentUpon>ThiTN.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagram.cs">
+      <DependentUpon>ThiTN.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TaiKhoan.cs">
-      <DependentUpon>DB.tt</DependentUpon>
+      <DependentUpon>ThiTN.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ThiTN.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ThiTN.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ThiTN.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ThiTN.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ThiTN.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ThiTN.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -213,32 +219,28 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\myStyle.css" />
+    <Content Include="Database\script.sql" />
+    <Content Include="Database\ThiTN.sql" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Models\DB.Context.tt">
+    <Content Include="Models\DB.edmx.sql" />
+    <Content Include="Models\ThiTN.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>DB.Context.cs</LastGenOutput>
-      <DependentUpon>DB.edmx</DependentUpon>
+      <DependentUpon>ThiTN.edmx</DependentUpon>
+      <LastGenOutput>ThiTN.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\DB.tt">
+    <Content Include="Models\ThiTN.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DB.edmx</DependentUpon>
-      <LastGenOutput>DB.cs</LastGenOutput>
+      <DependentUpon>ThiTN.edmx</DependentUpon>
+      <LastGenOutput>ThiTN.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\GiangVien\Views\web.config" />
     <Content Include="Areas\GiangVien\Views\Shared\_GiangVienLayout.cshtml" />
     <Content Include="Areas\GiangVien\Views\Home\Index.cshtml" />
-    <EntityDeploy Include="Models\DB.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>DB.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\DB.edmx.diagram">
-      <DependentUpon>DB.edmx</DependentUpon>
-    </Content>
     <Content Include="Areas\GiangVien\Views\CauHois\Create.cshtml" />
     <Content Include="Areas\GiangVien\Views\CauHois\Delete.cshtml" />
     <Content Include="Areas\GiangVien\Views\CauHois\Details.cshtml" />
@@ -262,6 +264,28 @@
     <Content Include="Areas\GiangVien\Views\DeThi_CauHoi\Details.cshtml" />
     <Content Include="Areas\GiangVien\Views\DeThi_CauHoi\Edit.cshtml" />
     <Content Include="Areas\GiangVien\Views\DeThi_CauHoi\Index.cshtml" />
+    <EntityDeploy Include="Models\ThiTN.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ThiTN.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\ThiTN.edmx.diagram">
+      <DependentUpon>ThiTN.edmx</DependentUpon>
+    </Content>
+    <Content Include="Areas\GiangVien\Views\CauHoi_LuaChon\Create.cshtml" />
+    <Content Include="Areas\GiangVien\Views\CauHoi_LuaChon\Delete.cshtml" />
+    <Content Include="Areas\GiangVien\Views\CauHoi_LuaChon\Details.cshtml" />
+    <Content Include="Areas\GiangVien\Views\CauHoi_LuaChon\Edit.cshtml" />
+    <Content Include="Areas\GiangVien\Views\CauHoi_LuaChon\Index.cshtml" />
+    <Content Include="Areas\GiangVien\Views\KhoaHocs\Create.cshtml" />
+    <Content Include="Areas\GiangVien\Views\KhoaHocs\Delete.cshtml" />
+    <Content Include="Areas\GiangVien\Views\KhoaHocs\Details.cshtml" />
+    <Content Include="Areas\GiangVien\Views\KhoaHocs\Edit.cshtml" />
+    <Content Include="Areas\GiangVien\Views\KhoaHocs\Index.cshtml" />
+    <Content Include="Areas\GiangVien\Views\LuaChons\Create.cshtml" />
+    <Content Include="Areas\GiangVien\Views\LuaChons\Delete.cshtml" />
+    <Content Include="Areas\GiangVien\Views\LuaChons\Details.cshtml" />
+    <Content Include="Areas\GiangVien\Views\LuaChons\Edit.cshtml" />
+    <Content Include="Areas\GiangVien\Views\LuaChons\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -288,6 +312,11 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_myLayout.cshtml" />
+    <Content Include="Views\DeThis\Create.cshtml" />
+    <Content Include="Views\DeThis\Delete.cshtml" />
+    <Content Include="Views\DeThis\Details.cshtml" />
+    <Content Include="Views\DeThis\Edit.cshtml" />
+    <Content Include="Views\DeThis\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
