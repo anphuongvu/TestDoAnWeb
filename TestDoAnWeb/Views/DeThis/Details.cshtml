@@ -190,7 +190,7 @@
                                 else
                                 {
                                     <div class="row hidden" id="quest_@Html.DisplayFor(modelItem => cauhois[i].MaCauHoi)">
-                                        <h4>Câu hỏi @(i+1):</h4>
+                                        @*<h4>Câu hỏi @(i+1):</h4>*@
                                         <div class="col-md-offset-1 col-md-11">
                                             @Html.DisplayFor(modelItem => cauhois[i].NoiDung)
                                         </div>
@@ -209,7 +209,7 @@
 
                             }
 
-                            <div class="row text-right" id="SHowButton">
+                            <div class="row text-right" id="SHowButton" style="margin-right: 15px; margin-left: 15px;">
                                 @for (int i = 1; i < cauhois.Count; i++)
                                 {
                                     <input class="hidden btn btn-info" type="button" id="pre_btn_@cauhois[i].MaCauHoi" value="Trước" onclick="ShowPreData(@cauhois[i].MaCauHoi)" />
