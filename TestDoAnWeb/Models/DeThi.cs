@@ -18,6 +18,7 @@ namespace TestDoAnWeb.Models
         public DeThi()
         {
             this.CauHois = new HashSet<CauHois>();
+            this.DeThis_Chitiets = new HashSet<DeThis_Chitiets>();
         }
     
         public int MaDeThi { get; set; }
@@ -31,5 +32,7 @@ namespace TestDoAnWeb.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CauHois> CauHois { get; set; }
         public virtual KhoaHoc KhoaHoc { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DeThis_Chitiets> DeThis_Chitiets { get; set; }
     }
 }

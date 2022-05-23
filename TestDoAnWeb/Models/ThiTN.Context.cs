@@ -37,5 +37,6 @@ namespace TestDoAnWeb.Models
         public virtual DbSet<PhanQuyen> PhanQuyens { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<TaiKhoan> TaiKhoans { get; set; }
+        public virtual DbSet<DeThis_Chitiets> DeThis_Chitiets { get; set; }
     }
 }
