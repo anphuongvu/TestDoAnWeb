@@ -5,42 +5,53 @@
     Layout = "~/Areas/GiangVien/Views/Shared/_GiangVienLayout.cshtml";
 }
 
-<h2>Index</h2>
+<h2 style="margin-left: 20px;">Danh sách câu hỏi</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.NoiDung)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DeThi.TenMonThi)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.GiaoVien.HoTen)
-        </th>
-        <th></th>
-    </tr>
+<div style="display: flex;justify-content: space-between;">
+    <p style="margin-left: 20px;">
+        @Html.ActionLink("Thêm mới", "Create")
+    </p>
+    <p style="margin-right: 20px;">
+        @Html.ActionLink("Xem chi tiết Lựa chọn", "Index", "CauHoi_LuaChon")
+    </p>
+</div>
+<div style="margin: 10px;">
+    <table class="table">
+        <tr>
+            <th>
+                Nội dung
+                @*@Html.DisplayNameFor(model => model.NoiDung)*@
+            </th>
+            <th>
+                Tên môn thi
+                @*@Html.DisplayNameFor(model => model.DeThi.TenMonThi)*@
+            </th>
+            <th>
+                Họ Tên Giảng viên
+                @*@Html.DisplayNameFor(model => model.GiaoVien.HoTen)*@
+            </th>
+            <th></th>
+        </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.NoiDung)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DeThi.TenMonThi)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.GiaoVien.HoTen)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.MaCauHoi }) |
-            @Html.ActionLink("Details", "Details", new { id=item.MaCauHoi }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.MaCauHoi })
-        </td>
-    </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NoiDung)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DeThi.TenMonThi)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GiaoVien.HoTen)
+                </td>
+                <td>
+                    @Html.ActionLink("Sửa", "Edit", new { id = item.MaCauHoi }) |
+                    @Html.ActionLink("Chi tiết", "Details", new { id = item.MaCauHoi }) |
+                    @Html.ActionLink("Xóa", "Delete", new { id = item.MaCauHoi })
+                </td>
+            </tr>
+        }
 
-</table>
+    </table>
+</div>

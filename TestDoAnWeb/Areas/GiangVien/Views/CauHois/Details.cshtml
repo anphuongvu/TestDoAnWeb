@@ -5,10 +5,10 @@
     Layout = "~/Areas/GiangVien/Views/Shared/_GiangVienLayout.cshtml";
 }
 
-<h2>Details</h2>
+<h2>Chi tiết</h2>
 
 <div>
-    <h4>CauHois</h4>
+    <h4>Câu hỏi</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -37,7 +37,8 @@
 
     </dl>
 </div>
+
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.MaCauHoi }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Chỉnh sửa", "Edit", new { id = Model.MaCauHoi }) |
+    @Html.ActionLink("Quay lại", "Index")
 </p>
