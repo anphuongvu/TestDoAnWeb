@@ -4,19 +4,19 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="18650a3e7b9e4a0bb77d1febe7d34f0b" Name="Diagram1">
-        <EntityTypeShape EntityType="QLThiTracNghiemOnlModel.BaiLam" Width="1.5" PointX="7.5" PointY="7.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="QLThiTracNghiemOnlModel.CauHoi_LuaChon" Width="1.5" PointX="7.5" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="QLThiTracNghiemOnlModel.CauHois" Width="1.5" PointX="5.25" PointY="4.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="QLThiTracNghiemOnlModel.DeThi" Width="1.5" PointX="3" PointY="4.375" IsExpanded="true" />
+      <Diagram DiagramId="18650a3e7b9e4a0bb77d1febe7d34f0b" Name="Diagram1" ZoomLevel="57">
+        <EntityTypeShape EntityType="QLThiTracNghiemOnlModel.BaiLam" Width="1.5" PointX="11.125" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLThiTracNghiemOnlModel.CauHoi_LuaChon" Width="1.5" PointX="10.625" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLThiTracNghiemOnlModel.CauHois" Width="1.5" PointX="7.125" PointY="0.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLThiTracNghiemOnlModel.DeThi" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="QLThiTracNghiemOnlModel.GiaoVien" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="QLThiTracNghiemOnlModel.HocSinh_KhoaHoc" Width="1.5" PointX="5.25" PointY="9" IsExpanded="true" />
-        <EntityTypeShape EntityType="QLThiTracNghiemOnlModel.HocSinh" Width="1.5" PointX="3" PointY="10.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="QLThiTracNghiemOnlModel.KhoaHoc" Width="1.5" PointX="0.75" PointY="6.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="QLThiTracNghiemOnlModel.LuaChon" Width="1.5" PointX="5.25" PointY="1.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="QLThiTracNghiemOnlModel.PhanQuyen" Width="1.5" PointX="3" PointY="15.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="QLThiTracNghiemOnlModel.sysdiagram" Width="1.5" PointX="7.75" PointY="1.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="QLThiTracNghiemOnlModel.TaiKhoan" Width="1.5" PointX="5.25" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLThiTracNghiemOnlModel.HocSinh_KhoaHoc" Width="1.5" PointX="1.375" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLThiTracNghiemOnlModel.HocSinh" Width="1.5" PointX="7" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLThiTracNghiemOnlModel.KhoaHoc" Width="1.5" PointX="1.375" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLThiTracNghiemOnlModel.LuaChon" Width="1.5" PointX="10.875" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLThiTracNghiemOnlModel.PhanQuyen" Width="1.5" PointX="2.875" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLThiTracNghiemOnlModel.sysdiagram" Width="1.5" PointX="13.875" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLThiTracNghiemOnlModel.TaiKhoan" Width="1.5" PointX="0.5" PointY="11.875" IsExpanded="true" />
         <AssociationConnector Association="QLThiTracNghiemOnlModel.FK_BaiLam_CauHoi" ManuallyRouted="false" />
         <AssociationConnector Association="QLThiTracNghiemOnlModel.FK_BaiLam_HocSinh" ManuallyRouted="false" />
         <AssociationConnector Association="QLThiTracNghiemOnlModel.FK_BaiLam_LuaChon" ManuallyRouted="false" />
@@ -31,6 +31,9 @@
         <AssociationConnector Association="QLThiTracNghiemOnlModel.FK_HocSinh_KhoaHoc" ManuallyRouted="false" />
         <AssociationConnector Association="QLThiTracNghiemOnlModel.FK_TaiKhoan_HocSinh" ManuallyRouted="false" />
         <AssociationConnector Association="QLThiTracNghiemOnlModel.FK_TaiKhoan_PhanQuyen" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="QLThiTracNghiemOnlModel.DeThis_Chitiets" Width="1.5" PointX="6.25" PointY="5.125" />
+        <AssociationConnector Association="QLThiTracNghiemOnlModel.FK_Dethis_Chitiets1" />
+        <AssociationConnector Association="QLThiTracNghiemOnlModel.FK_Dethis_Chitiets" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
