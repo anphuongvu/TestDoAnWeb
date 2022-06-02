@@ -10,6 +10,10 @@ namespace TestDoAnWeb.Controllers
     {
         public ActionResult Index()
         {
+            if (Session["TaiKhoan"] == null)
+            {
+                return RedirectToAction("Login", "Default");
+            }
             return View();
         }
 

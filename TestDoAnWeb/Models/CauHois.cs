@@ -20,6 +20,7 @@ namespace TestDoAnWeb.Models
             this.BaiLams = new HashSet<BaiLam>();
             this.CauHoi_LuaChon = new HashSet<CauHoi_LuaChon>();
             this.DeThis_Chitiets = new HashSet<DeThis_Chitiets>();
+            this.DeThis = new HashSet<DeThi>();
         }
     
         public int MaCauHoi { get; set; }
@@ -35,5 +36,7 @@ namespace TestDoAnWeb.Models
         public virtual GiaoVien GiaoVien { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DeThis_Chitiets> DeThis_Chitiets { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DeThi> DeThis { get; set; }
     }
 }

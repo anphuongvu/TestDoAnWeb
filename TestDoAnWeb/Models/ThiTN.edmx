@@ -43,6 +43,7 @@
           <Property Name="MaKhoaHoc" Type="int" />
           <Property Name="ThoiHanDeThi" Type="datetime" Nullable="false" />
           <Property Name="ThoiGianLamBai" Type="int" Nullable="false" />
+          <Property Name="MaCauHoi" Type="int" />
         </EntityType>
         <EntityType Name="DeThis_Chitiets">
           <Key>
@@ -125,6 +126,18 @@
           <Property Name="Password" Type="nvarchar" MaxLength="100" />
           <Property Name="NgayTaoTaiKhoan" Type="datetime" />
         </EntityType>
+        <Association Name="FK_DeThi_CauHoi">
+          <End Role="CauHois" Type="Self.CauHois" Multiplicity="0..1" />
+          <End Role="DeThis" Type="Self.DeThis" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CauHois">
+              <PropertyRef Name="MaCauHoi" />
+            </Principal>
+            <Dependent Role="DeThis">
+              <PropertyRef Name="MaCauHoi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Dethis_Chitiets">
           <End Role="DeThis" Type="Self.DeThis" Multiplicity="1" />
           <End Role="DeThis_Chitiets" Type="Self.DeThis_Chitiets" Multiplicity="*" />
@@ -163,6 +176,10 @@
           <EntitySet Name="PhanQuyens" EntityType="Self.PhanQuyens" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TaiKhoans" EntityType="Self.TaiKhoans" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_DeThi_CauHoi" Association="Self.FK_DeThi_CauHoi">
+            <End Role="CauHois" EntitySet="CauHois" />
+            <End Role="DeThis" EntitySet="DeThis" />
+          </AssociationSet>
           <AssociationSet Name="FK_Dethis_Chitiets" Association="Self.FK_Dethis_Chitiets">
             <End Role="DeThis" EntitySet="DeThis" />
             <End Role="DeThis_Chitiets" EntitySet="DeThis_Chitiets" />
@@ -212,6 +229,7 @@
           <NavigationProperty Name="DeThi" Relationship="Self.FK_CauHoi_DeThi" FromRole="CauHois" ToRole="DeThis" />
           <NavigationProperty Name="GiaoVien" Relationship="Self.FK_CauHoi_GiaoVien" FromRole="CauHois" ToRole="GiaoViens" />
           <NavigationProperty Name="DeThis_Chitiets" Relationship="QLThiTracNghiemOnlModel.FK_Dethis_Chitiets1" FromRole="CauHois" ToRole="DeThis_Chitiets" />
+          <NavigationProperty Name="DeThis" Relationship="QLThiTracNghiemOnlModel.FK_DeThi_CauHoi" FromRole="CauHois" ToRole="DeThi" />
         </EntityType>
         <EntityType Name="DeThi">
           <Key>
@@ -227,6 +245,8 @@
           <NavigationProperty Name="CauHois" Relationship="Self.FK_CauHoi_DeThi" FromRole="DeThis" ToRole="CauHois" />
           <NavigationProperty Name="KhoaHoc" Relationship="Self.FK_DeThi_KhoaHoc" FromRole="DeThis" ToRole="KhoaHocs" />
           <NavigationProperty Name="DeThis_Chitiets" Relationship="QLThiTracNghiemOnlModel.FK_Dethis_Chitiets" FromRole="DeThi" ToRole="DeThis_Chitiets" />
+          <Property Name="MaCauHoi" Type="Int32" />
+          <NavigationProperty Name="CauHois1" Relationship="QLThiTracNghiemOnlModel.FK_DeThi_CauHoi" FromRole="DeThi" ToRole="CauHois" />
         </EntityType>
         <EntityType Name="GiaoVien">
           <Key>
@@ -573,6 +593,10 @@
             <End Role="DeThi" EntitySet="DeThis" />
             <End Role="DeThis_Chitiets" EntitySet="DeThis_Chitiets" />
           </AssociationSet>
+          <AssociationSet Name="FK_DeThi_CauHoi" Association="QLThiTracNghiemOnlModel.FK_DeThi_CauHoi">
+            <End Role="CauHois" EntitySet="CauHois" />
+            <End Role="DeThi" EntitySet="DeThis" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="DeThis_Chitiets">
           <Key>
@@ -606,6 +630,18 @@
             </Principal>
             <Dependent Role="DeThis_Chitiets">
               <PropertyRef Name="IdDeThi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DeThi_CauHoi">
+          <End Type="QLThiTracNghiemOnlModel.CauHois" Role="CauHois" Multiplicity="0..1" />
+          <End Type="QLThiTracNghiemOnlModel.DeThi" Role="DeThi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CauHois">
+              <PropertyRef Name="MaCauHoi" />
+            </Principal>
+            <Dependent Role="DeThi">
+              <PropertyRef Name="MaCauHoi" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -646,6 +682,7 @@
           <EntitySetMapping Name="DeThis">
             <EntityTypeMapping TypeName="QLThiTracNghiemOnlModel.DeThi">
               <MappingFragment StoreEntitySet="DeThis">
+                <ScalarProperty Name="MaCauHoi" ColumnName="MaCauHoi" />
                 <ScalarProperty Name="MaDeThi" ColumnName="MaDeThi" />
                 <ScalarProperty Name="TenMonThi" ColumnName="TenMonThi" />
                 <ScalarProperty Name="NgayThi" ColumnName="NgayThi" />

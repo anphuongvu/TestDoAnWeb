@@ -19,6 +19,10 @@ namespace TestDoAnWeb.Controllers
 
         public async Task<ActionResult> Index()
         {
+            if (Session["TaiKhoan"] == null)
+            {
+                return RedirectToAction("Login", "Default");
+            }
             var deThis = db.DeThis.Include(d => d.KhoaHoc);
             return View(await deThis.ToListAsync());
         }
