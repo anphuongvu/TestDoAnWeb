@@ -11,6 +11,10 @@ namespace TestDoAnWeb.Areas.GiangVien.Controllers
         // GET: GiangVien/Home
         public ActionResult Index()
         {
+            if (Session["TaiKhoan"] == null)
+            {
+                return RedirectToAction("Login", "Default");
+            }
             return View();
         }
     }

@@ -18,6 +18,10 @@ namespace TestDoAnWeb.Areas.GiangVien.Controllers
         // GET: GiangVien/CauHois
         public async Task<ActionResult> Index()
         {
+            if (Session["TaiKhoan"] == null)
+            {
+                return RedirectToAction("Login", "Default");
+            }
             var cauHois = db.CauHois.Include(c => c.DeThi).Include(c => c.GiaoVien);
             return View(await cauHois.ToListAsync());
         }

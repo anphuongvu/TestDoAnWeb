@@ -18,6 +18,10 @@ namespace TestDoAnWeb.Areas.GiangVien.Controllers
         // GET: GiangVien/KhoaHocs
         public async Task<ActionResult> Index()
         {
+            if (Session["TaiKhoan"] == null)
+            {
+                return RedirectToAction("Login", "Default");
+            }
             return View(await db.KhoaHocs.ToListAsync());
         }
 

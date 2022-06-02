@@ -18,11 +18,68 @@ namespace TestDoAnWeb.Areas.GiangVien.Controllers
         // GET: GiangVien/DeThis
         public async Task<ActionResult> Index()
         {
+            if (Session["TaiKhoan"] == null)
+            {
+                return RedirectToAction("Login", "Default");
+            }
             var deThis = db.DeThis.Include(d => d.KhoaHoc);
             return View(await deThis.ToListAsync());
         }
+        [HttpPost]
+        public JsonResult AddCauHoi(int IdDeThi, int IdCauHoi)
+        {
+            try
+            {
+                //int IdDeThi =1, IdCauHoi = 1;
+                //Kiểm tra đã tồn tịa 1 record trong bảng chi tiết đề thi hay chưa
+                var kt= db.DeThis_Chitiets.Count(x=> x.IdCauHoi == IdCauHoi && x.IdDeThi ==IdDeThi);
+                if(kt > 0)
+                {
+                    return Json(new { code = 403, msg = "Câu hỏi này đã tồn tại trong đề thi !" }, JsonRequestBehavior.AllowGet);
+                }
+                var ctdt = new DeThis_Chitiets();
+                ctdt.IdDeThi = IdDeThi;
+                ctdt.IdCauHoi = IdCauHoi;
 
-        // GET: GiangVien/DeThis/Details/5
+                db.DeThis_Chitiets.Add(ctdt);
+                db.SaveChanges();
+                return Json(new { code = 200, msg = "Thêm mới câu hỏi thành công!" }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { code = 500, msg = "Thêm mới câu hỏi thất bại: "+ex.Message }, JsonRequestBehavior.AllowGet);
+            }
+            
+        }
+        [HttpGet]
+        public JsonResult ListDTCT(int IdDeThi)
+        {
+            try
+            {
+                
+                var rs = (from ct in db.DeThis_Chitiets.Where(x => x.IdDeThi == IdDeThi)
+                          join ch in db.CauHois on ct.IdCauHoi equals ch.MaCauHoi
+                          join lc in db.CauHoi_LuaChon on ct.IdCauHoi equals lc.MaCauHoi
+                          select new 
+                          { 
+                              Id = ch.MaCauHoi,
+                              NoiDung= ch.NoiDung,
+                              DA = lc.MaLuaChon,
+                              DB = lc.MaLuaChon,
+                              DC = lc.MaLuaChon,
+                              DD= lc.MaLuaChon,
+                              DAD =lc.CauTraLoi
+                          } ).ToList();
+                return Json(new { code = 200,dsCauHoi = rs, msg = "Load chi tiết câu hỏi thành công!" }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+
+                return Json(new { code = 500, msg = "Load chi tiết câu hỏi thất bại: " + ex.Message }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        //GET: GiangVien/DeThis/Details/5
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
@@ -34,6 +91,7 @@ namespace TestDoAnWeb.Areas.GiangVien.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.MaCauHoi = new SelectList(db.CauHois, "MacauHoi", "NoiDung");
             return View(deThi);
         }
 
@@ -129,5 +187,6 @@ namespace TestDoAnWeb.Areas.GiangVien.Controllers
             }
             base.Dispose(disposing);
         }
+
     }
 }

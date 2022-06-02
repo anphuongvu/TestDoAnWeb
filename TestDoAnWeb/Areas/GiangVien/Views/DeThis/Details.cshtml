@@ -4,6 +4,52 @@
     ViewBag.Title = "Details";
     Layout = "~/Areas/GiangVien/Views/Shared/_GiangVienLayout.cshtml";
 }
+<style>
+
+    /* The Modal (background) */
+    .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        padding-top: 100px; /* Location of the box */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    }
+
+    /* Modal Content */
+    .modal-content {
+        background-color: #fefefe;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        height: 350px;    }
+
+    /* The Close Button */
+    .close {
+        color: #aaaaaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    .modal-footer {
+        margin-top: 200px;
+        padding: 2px 10px;
+        color: white;
+    }
+</style>
 
 <h2>Details</h2>
 
@@ -12,7 +58,8 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.TenMonThi)
+            Tên môn thi
+            @*@Html.DisplayNameFor(model => model.TenMonThi)*@
         </dt>
 
         <dd>
@@ -20,23 +67,25 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.NgayThi)
+            Ngày thi
+            @*@Html.DisplayNameFor(model => model.NgayThi)*@
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.NgayThi)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.SoCauHoi)
-        </dt>
+        @*<dt>
+                @Html.DisplayNameFor(model => model.SoCauHoi)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.SoCauHoi)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.SoCauHoi)
+            </dd>*@
 
         <dt>
-            @Html.DisplayNameFor(model => model.ThoiHanDeThi)
+            Thời hạn đề thi
+            @*@Html.DisplayNameFor(model => model.ThoiHanDeThi)*@
         </dt>
 
         <dd>
@@ -44,7 +93,8 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.ThoiGianLamBai)
+            Thời gian làm bài
+            @*@Html.DisplayNameFor(model => model.ThoiGianLamBai)*@
         </dt>
 
         <dd>
@@ -52,7 +102,8 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.KhoaHoc.TenKhoaHoc)
+            Tên khóa học
+            @*@Html.DisplayNameFor(model => model.KhoaHoc.TenKhoaHoc)*@
         </dt>
 
         <dd>
@@ -61,7 +112,127 @@
 
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.MaDeThi }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+<div>
+    <button style="float:right;" type="button" class="btn btn-info" id="myBtn">Thêm câu hỏi</button>
+</div>
+
+<div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Chọn câu hỏi</h2>
+        <h2 style="display:none;" class="MaDeThi">@Model.MaDeThi</h2>
+        <div class="form-group">
+            @Html.LabelFor(model => model.MaCauHoi, "Mã Câu Hỏi", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("MaCauHoi", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.MaCauHoi, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button style="float:right; margin-top: 5px;" type="button" class="btn btn-info" id="btnAddCH">Xác nhận chọn</button>
+        </div>
+    </div>
+
+</div>
+<div>
+    <p>
+        @Html.ActionLink("Chỉnh sửa", "Edit", new { id = Model.MaDeThi }) |
+        @Html.ActionLink("Quay về", "Index")
+    </p>
+</div>
+<div>
+    <table class="table">
+        <tr>
+            <th>Nội dung</th>
+            <th>Câu A</th>
+            <th>Câu B</th>
+            <th>Câu C</th>
+            <th>Câu D</th>
+            <th>Đáp án đúng</th>
+            <th></th>
+        </tr>
+        <tbody id="tblDSCH" ></tbody>
+    </table>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js">
+    
+</script>
+<script>
+    var stt = 1;
+    var sel = document.querySelector("#MaCauHoi");
+    var IdDeThi = parseInt(document.querySelector(".MaDeThi").textContent);
+    console.log(IdDeThi);
+    var opt = sel.options[sel.selectedIndex];
+    console.log(opt.value);
+
+    LoadChiTietDeThi();
+    // Get the modal
+    var modal = document.getElementById("myModal");
+
+    // Get the button that opens the modal
+    var btn = document.getElementById("myBtn");
+
+    var btnAdd = document.getElementById("btnAddCH");
+    btnAdd.onclick = function () {
+        $.ajax({
+            url: '/GiangVien/DeThis/AddCauHoi',
+            type: 'post',
+            data: {
+                IdDeThi,
+                IdCauHoi: parseInt(opt.value)
+            },
+            success: function (data) {
+                alert(data.msg);
+                LoadChiTietDeThi();
+            }
+        })
+    }
+    function LoadChiTietDeThi() {
+        $.ajax({
+            url: '/GiangVien/DeThis/ListDTCT',
+            type: 'get',
+            data: {
+                IdDeThi
+            },
+            success: function (data) {
+                let e = "";
+                data.dsCauHoi.forEach(ch => {
+                    let tr = '<tr id="' + ch.Id + '">';
+                    tr += '<td>' +ch.NoiDung +'</td>';
+                    tr += '<td>' +ch.DA+'</td>';
+                    tr += '<td>' +ch.DB+'</td>';
+                    tr += '<td>' +ch.DC+'</td>';
+                    tr += '<td>' + ch.DD + '</td>';
+                    tr += '<td>' + ch.DAD + '</td>';
+                    tr += '</tr>';
+                    console.log(tr);
+                    e += tr;
+                    
+                })
+                $('#tblDSCH').html(e);
+            }
+        })
+    }
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks the button, open the modal
+    btn.onclick = function () {
+        modal.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function () {
+        modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+    
+</script>
