@@ -11,6 +11,10 @@ namespace TestDoAnWeb.Areas.Admin.Controllers
         // GET: Admin/Home
         public ActionResult Index()
         {
+            if (Session["TaiKhoan"] == null)
+            {
+                return RedirectToAction("Login", "Default");
+            }    
             return View();
         }
     }
