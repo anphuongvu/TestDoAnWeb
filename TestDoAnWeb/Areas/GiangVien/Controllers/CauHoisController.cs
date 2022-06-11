@@ -68,6 +68,75 @@ namespace TestDoAnWeb.Areas.GiangVien.Controllers
             return View(cauHois);
         }
 
+        private void XuLy(string maLuaChon, string luachon, int maCauHoi)
+        {
+            
+            if (maLuaChon != "")
+            {
+                int mlc = int.Parse(maLuaChon);
+                // cập nhật lựa chọn cũ
+                LuaChon luaChon = db.LuaChons.Where(lc => lc.MaLuaChon == mlc).FirstOrDefault();
+                luaChon.NoiDung = luachon;
+                db.Entry(luaChon).State = EntityState.Modified;
+
+                // câp nhật đáp án false
+                CauHoi_LuaChon chlc = db.CauHoi_LuaChon.Where(lc => lc.MaLuaChon == mlc).FirstOrDefault();
+                if (chlc != null)
+                {
+                    chlc.CauTraLoi = false;
+                }
+                db.Entry(chlc).State = EntityState.Modified;
+            }
+            else
+            {
+                // them lựa chọn mới
+                if (luachon != "")
+                {
+                    // them lựa chọn
+                    if (db.LuaChons.Where(lc => lc.NoiDung == luachon).ToList().Count == 0)
+                    {
+                        LuaChon luaChon = new LuaChon();
+                        luaChon.NoiDung = luachon;
+                        db.LuaChons.Add(luaChon);
+                        db.SaveChanges();
+                    }
+
+                    LuaChon newLC = db.LuaChons.Where(lc => lc.NoiDung == luachon).FirstOrDefault();
+
+                    // thêm câu hỏi lựa chọn
+                    CauHoi_LuaChon chlc = new CauHoi_LuaChon();
+                    chlc.MaCauHoi = maCauHoi;
+                    chlc.MaLuaChon = newLC.MaLuaChon;
+                    chlc.CauTraLoi = false;
+                    db.CauHoi_LuaChon.Add(chlc);
+                }
+            }
+            db.SaveChanges();
+        }
+
+        [HttpPost]
+        public ActionResult EditCauHoiLuaChon(string maCauHoi, string lc1, string lc2, string lc3, string lc4, string dapan=null, string id1 =null, string id2 = null, string id3 = null, string id4 = null)
+        {
+
+            XuLy(id1, lc1, int.Parse(maCauHoi));
+            XuLy(id2, lc2, int.Parse(maCauHoi));
+            XuLy(id3, lc3, int.Parse(maCauHoi));
+            XuLy(id4, lc4, int.Parse(maCauHoi));
+            if(dapan != "")
+            {
+                int da = int.Parse(dapan);
+                CauHoi_LuaChon chlc = db.CauHoi_LuaChon.Where(lc => lc.MaLuaChon == da).FirstOrDefault();
+                if(chlc != null)
+                {
+                    chlc.CauTraLoi = true;
+                }
+                db.Entry(chlc).State = EntityState.Modified;
+            }
+
+            db.SaveChanges();
+            return Redirect(Request.UrlReferrer.ToString());
+        }
+
         // GET: GiangVien/CauHois/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {

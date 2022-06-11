@@ -30,27 +30,57 @@
                 Họ Tên Giảng viên
                 @*@Html.DisplayNameFor(model => model.GiaoVien.HoTen)*@
             </th>
+            <th>
+                Lựa chọn 1
+            </th>
+            <th>
+                Lựa chọn 2
+            </th>
+            <th>
+                Lựa chọn 3
+            </th>
+            <th>
+                Lựa chọn 4
+            </th>
+            <th>
+                Đáp án
+            </th>
             <th></th>
         </tr>
 
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NoiDung)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DeThi.TenMonThi)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.GiaoVien.HoTen)
-                </td>
-                <td>
-                    @Html.ActionLink("Sửa", "Edit", new { id = item.MaCauHoi }) |
-                    @Html.ActionLink("Chi tiết", "Details", new { id = item.MaCauHoi }) |
-                    @Html.ActionLink("Xóa", "Delete", new { id = item.MaCauHoi })
-                </td>
-            </tr>
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NoiDung)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DeThi.TenMonThi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GiaoVien.HoTen)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CauHoi_LuaChon.OrderBy(ii => ii.MaLuaChon).FirstOrDefault().LuaChon.NoiDung)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CauHoi_LuaChon.OrderBy(ii => ii.MaLuaChon).Skip(1).FirstOrDefault().LuaChon.NoiDung)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CauHoi_LuaChon.OrderBy(ii => ii.MaLuaChon).Skip(2).FirstOrDefault().LuaChon.NoiDung)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CauHoi_LuaChon.OrderBy(ii => ii.MaLuaChon).Skip(3).FirstOrDefault().LuaChon.NoiDung)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CauHoi_LuaChon.Where(chlc => chlc.CauTraLoi).FirstOrDefault().LuaChon.NoiDung)
+        </td>
+        <td>
+            @Html.ActionLink("Sửa", "Edit", new { id = item.MaCauHoi }) |
+            @Html.ActionLink("Chi tiết", "Details", new { id = item.MaCauHoi }) |
+            @Html.ActionLink("Xóa", "Delete", new { id = item.MaCauHoi })
+        </td>
+    </tr>
         }
 
     </table>

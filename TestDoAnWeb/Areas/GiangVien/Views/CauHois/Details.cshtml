@@ -6,13 +6,13 @@
 }
 
 <h2>Chi tiết</h2>
-
+<hr />
 <div>
     <h4>Câu hỏi</h4>
-    <hr />
+
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.NoiDung)
+            Nội dung câu hỏi
         </dt>
 
         <dd>
@@ -20,7 +20,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.DeThi.TenMonThi)
+            Tên môn
         </dt>
 
         <dd>
@@ -28,13 +28,12 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.GiaoVien.HoTen)
+            Tên người tạo
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.GiaoVien.HoTen)
         </dd>
-
     </dl>
 </div>
 
@@ -42,3 +41,100 @@
     @Html.ActionLink("Chỉnh sửa", "Edit", new { id = Model.MaCauHoi }) |
     @Html.ActionLink("Quay lại", "Index")
 </p>
+<hr />
+<h4>Danh sách lựa chọn</h4>
+
+<div>
+
+
+
+    <form method="post" action="/GiangVien/CauHois/EditCauHoiLuaChon">
+        <input class="hidden" name="maCauHoi" value="@Html.DisplayFor(model => model.MaCauHoi)" />
+        <dl class="dl-horizontal">
+            <dt>
+                Lựa chọn 1
+            </dt>
+
+            <dd>
+                <p class="t1">@Html.DisplayFor(model => model.CauHoi_LuaChon.OrderBy(ii => ii.MaLuaChon).Skip(0).FirstOrDefault().LuaChon.NoiDung)</p>
+                <input class="hidden" name="id1" value="@Html.DisplayFor(model => model.CauHoi_LuaChon.OrderBy(ii => ii.MaLuaChon).Skip(0).FirstOrDefault().LuaChon.MaLuaChon)" />
+                @Html.TextBoxFor(model => model.CauHoi_LuaChon.OrderBy(ii => ii.MaLuaChon).Skip(0).FirstOrDefault().LuaChon.NoiDung, new { @id = "lc1", @Name = "lc1", @class = "t2 text-box single-line hidden" })
+            </dd>
+
+            <dt>
+                Lựa chọn 2
+            </dt>
+
+            <dd>
+                <p class="t1">@Html.DisplayFor(model => model.CauHoi_LuaChon.OrderBy(ii => ii.MaLuaChon).Skip(1).FirstOrDefault().LuaChon.NoiDung)</p>
+                <input class="hidden" name="id2" value="@Html.DisplayFor(model => model.CauHoi_LuaChon.OrderBy(ii => ii.MaLuaChon).Skip(1).FirstOrDefault().LuaChon.MaLuaChon)" />
+                @Html.TextBoxFor(model => model.CauHoi_LuaChon.OrderBy(ii => ii.MaLuaChon).Skip(1).FirstOrDefault().LuaChon.NoiDung, new { @id = "lc2", @Name = "lc2", @class = "t2 text-box single-line hidden" })
+            </dd>
+
+            <dt>
+                Lựa chọn 3
+            </dt>
+
+            <dd>
+                <p class="t1">@Html.DisplayFor(model => model.CauHoi_LuaChon.OrderBy(ii => ii.MaLuaChon).Skip(2).FirstOrDefault().LuaChon.NoiDung)</p>
+                <input class="hidden" name="id3" value="@Html.DisplayFor(model => model.CauHoi_LuaChon.OrderBy(ii => ii.MaLuaChon).Skip(2).FirstOrDefault().LuaChon.MaLuaChon)" />
+                @Html.TextBoxFor(model => model.CauHoi_LuaChon.OrderBy(ii => ii.MaLuaChon).Skip(2).FirstOrDefault().LuaChon.NoiDung, new { @id = "lc3", @Name = "lc3", @class = "t2 text-box single-line hidden" })
+
+            </dd>
+            <dt>
+                Lựa chọn 4
+            </dt>
+
+            <dd>
+                <p class="t1">@Html.DisplayFor(model => model.CauHoi_LuaChon.OrderBy(ii => ii.MaLuaChon).Skip(3).FirstOrDefault().LuaChon.NoiDung)</p>
+                <input class="hidden" name="id4" value="@Html.DisplayFor(model => model.CauHoi_LuaChon.OrderBy(ii => ii.MaLuaChon).Skip(3).FirstOrDefault().LuaChon.MaLuaChon)" />
+                @Html.TextBoxFor(model => model.CauHoi_LuaChon.OrderBy(ii => ii.MaLuaChon).Skip(3).FirstOrDefault().LuaChon.NoiDung, new { @id = "lc4", @Name = "lc4", @class = "t2 text-box single-line hidden" })
+            </dd>
+            <dt>
+                Đáp án đúng
+            </dt>
+
+            <dd>
+                <p class="t1">@Html.DisplayFor(model => model.CauHoi_LuaChon.Where(chlc => chlc.CauTraLoi).FirstOrDefault().LuaChon.NoiDung)</p>
+                <select class="form-select t2 hidden" aria-label="" name="dapan">
+                    @foreach (var lc in Model.CauHoi_LuaChon)
+                    {
+                        if (lc.CauTraLoi)
+                        {
+                            <option value="@lc.MaLuaChon" selected>@lc.LuaChon.NoiDung</option>
+                        }
+                        else
+                        {
+                            <option value="@lc.MaLuaChon">@lc.LuaChon.NoiDung</option>
+                        }
+
+                    }
+
+                </select>
+
+            </dd>
+        </dl>
+        <button id="btn_luu" type="submit" class="btn btn-primary t2 hidden" onclick="luu()">Lưu</button>
+    </form>
+    <button id="btn_chinhsua" class="btn btn-primary t1" onclick="chinhSua()">Chỉnh sửa</button>
+</div>
+
+
+@section Scripts {
+    <script>
+
+        //pauseBtn.addEventListener('click', pauseTimer);
+
+        function chinhSua()  //number will get the clicked button's number
+        {
+            $(".t1").addClass("hidden");
+            $(".t2").removeClass("hidden");
+        }
+
+        function luu()  //number will get the clicked button's number
+        {
+            $(".t1").removeClass("hidden");
+            $(".t2").addClass("hidden");
+        }
+    </script>
+}
