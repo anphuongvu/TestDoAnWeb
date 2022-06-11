@@ -130,10 +130,13 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\DefaultController.cs" />
     <Compile Include="Areas\Admin\Controllers\GiaoViensController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\PhanQuyensController.cs" />
     <Compile Include="Areas\GiangVien\Controllers\CauHoisController.cs" />
     <Compile Include="Areas\GiangVien\Controllers\CauHoi_LuaChonController.cs" />
+    <Compile Include="Areas\GiangVien\Controllers\DefaultController.cs" />
     <Compile Include="Areas\GiangVien\Controllers\DeThisController.cs" />
     <Compile Include="Areas\GiangVien\Controllers\HomeController.cs" />
     <Compile Include="Areas\GiangVien\Controllers\KhoaHocsController.cs" />
@@ -154,6 +157,9 @@
       <DependentUpon>ThiTN.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DeThi.cs">
+      <DependentUpon>ThiTN.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DeThis_Chitiets.cs">
       <DependentUpon>ThiTN.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\GiaoVien.cs">
@@ -206,6 +212,7 @@
     <Content Include="Areas\Admin\img\rose.jpg" />
     <Content Include="Areas\Admin\img\suga.jpeg" />
     <Content Include="Areas\Admin\img\v.jpeg" />
+    <Content Include="Areas\GiangVien\css\loginStyle.css" />
     <Content Include="Areas\GiangVien\css\style.css" />
     <Content Include="Areas\GiangVien\img\chuga.png" />
     <Content Include="Areas\GiangVien\img\decade.jpg" />
@@ -219,7 +226,9 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\myStyle.css" />
+    <Content Include="Database\DBTN.sql" />
     <Content Include="Database\script.sql" />
+    <Content Include="Database\script1.sql" />
     <Content Include="Database\ThiTN.sql" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -293,6 +302,7 @@
     <Content Include="Areas\GiangVien\Views\LuaChons\Details.cshtml" />
     <Content Include="Areas\GiangVien\Views\LuaChons\Edit.cshtml" />
     <Content Include="Areas\GiangVien\Views\LuaChons\Index.cshtml" />
+    <Content Include="Areas\GiangVien\Views\Default\Login.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -324,6 +334,7 @@
     <Content Include="Views\DeThis\Details.cshtml" />
     <Content Include="Views\DeThis\Edit.cshtml" />
     <Content Include="Views\DeThis\Index.cshtml" />
+    <Content Include="Views\Default\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
