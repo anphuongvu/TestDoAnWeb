@@ -142,6 +142,7 @@
     <Compile Include="Areas\GiangVien\Controllers\KhoaHocsController.cs" />
     <Compile Include="Areas\GiangVien\Controllers\LuaChonsController.cs" />
     <Compile Include="Areas\GiangVien\GiangVienAreaRegistration.cs" />
+    <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Controllers\DeThisController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
