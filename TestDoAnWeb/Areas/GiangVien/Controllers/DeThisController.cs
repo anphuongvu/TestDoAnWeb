@@ -65,20 +65,18 @@ namespace TestDoAnWeb.Areas.GiangVien.Controllers
         {
             try
             {
-                
+
                 var rs = (from ct in db.DeThis_Chitiets.Where(x => x.IdDeThi == IdDeThi)
-                          join ch in db.CauHois on ct.IdCauHoi equals ch.MaCauHoi
-                          join lc in db.CauHoi_LuaChon on ct.IdCauHoi equals lc.MaCauHoi
-                          select new 
-                          { 
-                              Id = ch.MaCauHoi,
-                              NoiDung= ch.NoiDung,
-                              DA = lc.MaLuaChon,
-                              DB = lc.MaLuaChon,
-                              DC = lc.MaLuaChon,
-                              DD= lc.MaLuaChon,
-                              DAD =lc.CauTraLoi
-                          } ).ToList();
+                          select new
+                          {
+                              Id = ct.CauHois.MaCauHoi,
+                              NoiDung = ct.CauHois.NoiDung,
+                              DA = ct.CauHois.CauHoi_LuaChon.OrderBy(ii => ii.MaLuaChon).FirstOrDefault().LuaChon.NoiDung,
+                              DB = ct.CauHois.CauHoi_LuaChon.OrderBy(ii=> ii.MaLuaChon).Skip(1).FirstOrDefault() != null ? ct.CauHois.CauHoi_LuaChon.OrderBy(ii => ii.MaLuaChon).Skip(1).FirstOrDefault().LuaChon.NoiDung : "",
+                              DC = ct.CauHois.CauHoi_LuaChon.OrderBy(ii => ii.MaLuaChon).Skip(2).FirstOrDefault() != null ? ct.CauHois.CauHoi_LuaChon.OrderBy(ii => ii.MaLuaChon).Skip(2).FirstOrDefault().LuaChon.NoiDung : "",
+                              DD = ct.CauHois.CauHoi_LuaChon.OrderBy(ii => ii.MaLuaChon).Skip(3).FirstOrDefault() != null ? ct.CauHois.CauHoi_LuaChon.OrderBy(ii => ii.MaLuaChon).Skip(3).FirstOrDefault().LuaChon.NoiDung : "",
+                              DAD = ct.CauHois.CauHoi_LuaChon.Where(chlc => chlc.CauTraLoi).FirstOrDefault() != null ? ct.CauHois.CauHoi_LuaChon.Where(chlc => chlc.CauTraLoi).FirstOrDefault().LuaChon.NoiDung: "Không đáp án"
+                          }).ToList();
                 return Json(new { code = 200,dsCauHoi = rs, msg = "Load chi tiết câu hỏi thành công!" }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
