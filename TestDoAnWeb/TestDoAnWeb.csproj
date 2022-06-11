@@ -330,10 +330,7 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_myLayout.cshtml" />
-    <Content Include="Views\DeThis\Create.cshtml" />
-    <Content Include="Views\DeThis\Delete.cshtml" />
     <Content Include="Views\DeThis\Details.cshtml" />
-    <Content Include="Views\DeThis\Edit.cshtml" />
     <Content Include="Views\DeThis\Index.cshtml" />
     <Content Include="Views\Default\Login.cshtml" />
   </ItemGroup>
