@@ -164,9 +164,7 @@
     var sel = document.querySelector("#MaCauHoi");
     var IdDeThi = parseInt(document.querySelector(".MaDeThi").textContent);
     console.log(IdDeThi);
-    var opt = sel.options[sel.selectedIndex];
-    console.log(opt.value);
-
+    
     LoadChiTietDeThi();
     // Get the modal
     var modal = document.getElementById("myModal");
@@ -176,6 +174,8 @@
 
     var btnAdd = document.getElementById("btnAddCH");
     btnAdd.onclick = function () {
+        var opt = sel.options[sel.selectedIndex];
+        console.log(opt.value);
         $.ajax({
             url: '/GiangVien/DeThis/AddCauHoi',
             type: 'post',
