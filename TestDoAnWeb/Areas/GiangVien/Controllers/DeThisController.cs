@@ -43,6 +43,15 @@ namespace TestDoAnWeb.Areas.GiangVien.Controllers
 
                 db.DeThis_Chitiets.Add(ctdt);
                 db.SaveChanges();
+
+                // cập nhật số lượng câu hỏi
+                DeThi dt = db.DeThis.Where(dd => dd.MaDeThi == IdDeThi).FirstOrDefault();
+                if(dt != null)
+                {
+                    dt.SoCauHoi = dt.DeThis_Chitiets.Count;
+                    db.Entry(dt).State = EntityState.Modified;
+                    db.SaveChangesAsync();
+                }
                 return Json(new { code = 200, msg = "Thêm mới câu hỏi thành công!" }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
