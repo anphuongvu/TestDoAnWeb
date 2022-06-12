@@ -46,6 +46,27 @@ namespace TestDoAnWeb.Controllers
             return View(deThi);
         }
 
+        public float tinhDiem(int maHocSinh, int maDeThi)
+        {
+            DeThi deThi = db.DeThis.Find(maDeThi);
+            List<DeThis_Chitiets> dtcts = deThi.DeThis_Chitiets.ToList();
+            List<CauHois> cauHois = db.CauHois.Where(item => item.MaDeThi == maDeThi).ToList();
+            List<BaiLam> baiLams = db.BaiLams.Where(bl => bl.MaHocSinh == maHocSinh).ToList();
+
+            //tinh diem
+            int soCauDung = 0;
+            foreach (CauHois ch in cauHois)
+            {
+                BaiLam bailam = baiLams.Where(bl => bl.MaCauHoi == ch.MaCauHoi).FirstOrDefault();
+                CauHoi_LuaChon chlc = ch.CauHoi_LuaChon.Where(cc => cc.CauTraLoi).FirstOrDefault();
+                if (bailam != null && chlc != null && bailam.MaLuaChon == chlc.MaLuaChon)
+                {
+                    soCauDung += 1;
+                }
+            }
+            return soCauDung*1.0f/cauHois.Count;
+        }
+
         public ActionResult BaiLam(int maHocSinh, int maDeThi)
         {
             DeThi deThi = db.DeThis.Find(maDeThi);
