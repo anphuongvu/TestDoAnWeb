@@ -8,6 +8,9 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using TestDoAnWeb.Models;
+using System.IO;
+using OfficeOpenXml;
+//using Excel = Microsoft.Office.Interop.Excel;
 
 namespace TestDoAnWeb.Areas.GiangVien.Controllers
 {
@@ -68,7 +71,7 @@ namespace TestDoAnWeb.Areas.GiangVien.Controllers
             return View(cauHois);
         }
 
-        private void XuLy(string maLuaChon, string luachon, int maCauHoi)
+        private void XuLy(string maLuaChon, string luachon, int maCauHoi, bool dapan = false)
         {
             
             if (maLuaChon != "")
@@ -83,7 +86,7 @@ namespace TestDoAnWeb.Areas.GiangVien.Controllers
                 CauHoi_LuaChon chlc = db.CauHoi_LuaChon.Where(lc => lc.MaLuaChon == mlc).FirstOrDefault();
                 if (chlc != null)
                 {
-                    chlc.CauTraLoi = false;
+                    chlc.CauTraLoi = dapan;
                 }
                 db.Entry(chlc).State = EntityState.Modified;
             }
@@ -107,7 +110,7 @@ namespace TestDoAnWeb.Areas.GiangVien.Controllers
                     CauHoi_LuaChon chlc = new CauHoi_LuaChon();
                     chlc.MaCauHoi = maCauHoi;
                     chlc.MaLuaChon = newLC.MaLuaChon;
-                    chlc.CauTraLoi = false;
+                    chlc.CauTraLoi = dapan;
                     db.CauHoi_LuaChon.Add(chlc);
                 }
             }
@@ -205,6 +208,85 @@ namespace TestDoAnWeb.Areas.GiangVien.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public ActionResult ThemTuExcel(HttpPostedFileBase formFile)
+        {
+            // lấy mã giáo viên
+            int? maGV = 1;
+            if (Session["TaiKhoan"] != null)
+            {
+                if(((TaiKhoan)Session["TaiKhoan"]).GiaoVien != null)
+                    maGV = ((TaiKhoan)Session["TaiKhoan"]).GiaoVien.MaGiaoVien;
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    if (formFile != null)
+                    {
+                        // upload
+                        //string path = Path.Combine(Server.MapPath("~/Upload"), formFile.FileName);
+                        //formFile.SaveAs(path);
+                        ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+                        using (var package = new ExcelPackage(formFile.InputStream))
+                        {
+                            // get the first worksheet in the workbook
+                            ExcelWorksheet worksheet = package.Workbook.Worksheets.FirstOrDefault();
+                            
+                            if (worksheet != null)
+                            {
+                                var start = worksheet.Dimension.Start;
+                                var end = worksheet.Dimension.End;
+                                for (int row = start.Row+1; row <= end.Row; row++)
+                                { // Row by row...
+                                    // Thêm câu hỏi
+
+                                    // kiểm tra trùng
+                                    CauHois ch = null;
+                                    string noidungCH = worksheet.Cells[row, 1].Text;
+                                    if (db.CauHois.Where(cc => cc.NoiDung.Equals(noidungCH)).ToList().Count == 0)
+                                    {
+                                        ch = new CauHois();
+                                        ch.MaGiaoVien = maGV;
+                                        ch.NoiDung = worksheet.Cells[row, 1].Text;
+                                        db.CauHois.Add(ch);
+                                        db.SaveChanges();
+                                    }
+
+                                    // thêm lựa chọn
+                                    ch = db.CauHois.Where(cc => cc.NoiDung.Equals(noidungCH)).FirstOrDefault();
+                                    if(ch != null)
+                                    {
+                                        int da = 1;
+                                        if (worksheet.Cells[row, 6].Text != "")
+                                        {
+                                            da = int.Parse(worksheet.Cells[row, 6].Text);
+                                            
+                                        }
+
+                                        XuLy("", worksheet.Cells[row, 2].Text, ch.MaCauHoi, da == 1);
+                                        XuLy("", worksheet.Cells[row, 3].Text, ch.MaCauHoi, da == 2);
+                                        XuLy("", worksheet.Cells[row, 4].Text, ch.MaCauHoi, da == 3);
+                                        XuLy("", worksheet.Cells[row, 5].Text, ch.MaCauHoi, da == 4);
+                                    }    
+
+                                }
+                            }
+                            
+                        } // the using 
+
+                        // đọc file với chuyển vô SQL
+                    }
+                }
+                catch (Exception e)
+                {
+                    ViewBag.FileStatus = "Error while file uploading.";
+                }
+            }
+
+            return Redirect(Request.UrlReferrer.ToString());
         }
     }
 }

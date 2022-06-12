@@ -12,7 +12,19 @@
         @Html.ActionLink("Thêm mới", "Create")
     </p>
     <p style="margin-right: 20px;">
-        @Html.ActionLink("Xem chi tiết Lựa chọn", "Index", "CauHoi_LuaChon")
+        @using (Html.BeginForm("ThemTuExcel", "CauHois", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            
+            <div class="form-group col-md-6">
+                <input class="form-control" type="file" id="formFile" name="formFile" value="Chọn file">
+            </div>
+            <div class="form-group col-md-6">
+                <input type="submit" value="Thêm từ file Excel" class="btn btn-default" />
+            </div>
+        }
+        @*@Html.ActionLink("Xem chi tiết Lựa chọn", "Index", "CauHoi_LuaChon")*@
     </p>
 </div>
 <div style="margin: 10px;">
@@ -20,15 +32,12 @@
         <tr>
             <th>
                 Nội dung
-                @*@Html.DisplayNameFor(model => model.NoiDung)*@
             </th>
             <th>
                 Tên môn thi
-                @*@Html.DisplayNameFor(model => model.DeThi.TenMonThi)*@
             </th>
             <th>
                 Họ Tên Giảng viên
-                @*@Html.DisplayNameFor(model => model.GiaoVien.HoTen)*@
             </th>
             <th>
                 Lựa chọn 1
