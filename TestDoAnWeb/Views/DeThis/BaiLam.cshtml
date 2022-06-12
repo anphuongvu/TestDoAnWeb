@@ -1,0 +1,162 @@
+﻿@using TestDoAnWeb.Models
+@model TestDoAnWeb.Models.DeThi
+@{
+    ViewBag.Title = "BaiLam";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<BaiLam> baiLams = ViewBag.baiLams;
+    List<CauHois> cauhois = ViewBag.cauhois;
+}
+
+
+<!--Trang làm bài thi-->
+<div class="container-fuild">
+    <div class="layout">
+        <div class="layout-item">
+            <div class="thoigian">
+                
+            </div>
+            <div class="infoBaiThi">
+                <h4 style="margin: 10px">Thông tin đề thi</h4>
+                <div>
+                    <dl class="dl-horizontal">
+                        <dt>
+                            Tên môn thi:
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.TenMonThi)
+                        </dd>
+
+                        <dt>
+                            Ngày thi:
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.NgayThi)
+                        </dd>
+
+                        <dt>
+                            Số câu hỏi:
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.SoCauHoi)
+                        </dd>
+
+                        <dt>
+                            Thời hạn đề thi:
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.ThoiHanDeThi)
+                        </dd>
+
+                        <dt>
+                            Thời gian làm bài:
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.ThoiGianLamBai)
+                        </dd>
+
+                        <dt>
+                            Tên khóa học:
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.KhoaHoc.TenKhoaHoc)
+                        </dd>
+
+                        <dt>
+                            Điểm:
+                        </dt>
+
+                        <dd>
+                            @ViewBag.soCauDung / @cauhois.Count
+                        </dd>
+
+                    </dl>
+                </div>
+            </div>
+        </div>
+        <div class="layout-item">
+            <div class="cauhoi">
+                <h3>Bài đã làm</h3>
+                    <div class="row">
+                        <div class="col-md-12">
+                            @for (int i = 0; i < cauhois.Count; i++)
+                            {
+                                
+                                <div class="row " id="quest_@Html.DisplayFor(modelItem => cauhois[i].MaCauHoi)">
+
+                                    <div class="col-md-offset-1 col-md-11">
+                                        @Html.DisplayFor(modelItem => cauhois[i].NoiDung)
+                                    </div>
+
+                                    @foreach (CauHoi_LuaChon chlc in cauhois[i].CauHoi_LuaChon)
+                                    {
+                                        <div class="form-check col-md-offset-2 col-md-10">
+                                            @if (baiLams.Where(bl => bl.MaCauHoi == cauhois[i].MaCauHoi).FirstOrDefault().MaLuaChon == chlc.MaLuaChon)
+                                            {
+                                                if (chlc.CauTraLoi)
+                                                {
+                                                    <label class="form-check-label">
+                                                        @Html.DisplayFor(modelItem => chlc.LuaChon.NoiDung) : <ion-icon name="checkmark-circle-sharp"></ion-icon>
+                                                    </label>
+                                                }
+                                                else
+                                                {
+                                                    <label class="form-check-label">
+                                                        @Html.DisplayFor(modelItem => chlc.LuaChon.NoiDung)
+                                                    </label>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                if (chlc.CauTraLoi)
+                                                {
+                                                    
+                                                    @Html.DisplayFor(modelItem => chlc.LuaChon.NoiDung) 
+                                                    <span><ion-icon name="checkmark-circle-outline"></ion-icon></span>
+                                                }
+                                                else
+                                                {
+                                                    <p>
+                                                        @Html.DisplayFor(modelItem => chlc.LuaChon.NoiDung)
+                                                    </p>
+                                                }
+                                            }
+
+
+                                        </div>
+                                    }
+                                    @*<p>Bạn chọn: @Html.DisplayFor(modelItem => baiLams.Where(bl => bl.MaCauHoi == cauhois[i].MaCauHoi).FirstOrDefault().LuaChon.NoiDung)</p>*@
+                                </div>
+
+                            }
+
+                            <div class="row text-right" id="SHowButton" style="margin-right: 15px; margin-left: 15px;">
+                                @for (int i = 1; i < cauhois.Count; i++)
+                                {
+                                    <input class="hidden btn btn-info" type="button" id="pre_btn_@cauhois[i].MaCauHoi" value="Trước" onclick="ShowPreData(@cauhois[i].MaCauHoi)" />
+
+                                }
+                                @for (int i = 0; i < cauhois.Count - 1; i++)
+                                {
+                                    if (i == ViewBag.quest_idx)
+                                    {
+                                        <input class="btn btn-info" type="button" id="next_btn_@cauhois[i].MaCauHoi" value="Tiếp" onclick="ShowNextData(@cauhois[i].MaCauHoi)" />
+                                    }
+                                    else
+                                    {
+                                        <input class="hidden btn btn-info" type="button" id="next_btn_@cauhois[i].MaCauHoi" value="Tiếp" onclick="ShowNextData(@cauhois[i].MaCauHoi)" />
+                                    }
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+            </div>
+        </div>
+    </div>
+</div>
