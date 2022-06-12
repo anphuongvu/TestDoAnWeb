@@ -87,8 +87,9 @@ namespace TestDoAnWeb.Areas.GiangVien.Controllers
                 if (chlc != null)
                 {
                     chlc.CauTraLoi = dapan;
+                    db.Entry(chlc).State = EntityState.Modified;
                 }
-                db.Entry(chlc).State = EntityState.Modified;
+                
             }
             else
             {
@@ -107,14 +108,24 @@ namespace TestDoAnWeb.Areas.GiangVien.Controllers
                     LuaChon newLC = db.LuaChons.Where(lc => lc.NoiDung == luachon).FirstOrDefault();
 
                     // thêm câu hỏi lựa chọn
-                    CauHoi_LuaChon chlc = new CauHoi_LuaChon();
-                    chlc.MaCauHoi = maCauHoi;
-                    chlc.MaLuaChon = newLC.MaLuaChon;
-                    chlc.CauTraLoi = dapan;
-                    db.CauHoi_LuaChon.Add(chlc);
+                    CauHoi_LuaChon chlc = db.CauHoi_LuaChon.Where(clc => clc.MaCauHoi == maCauHoi && clc.MaLuaChon == newLC.MaLuaChon).FirstOrDefault();
+                    if (chlc == null)
+                    {
+                        chlc = new CauHoi_LuaChon();
+                        chlc.MaCauHoi = maCauHoi;
+                        chlc.MaLuaChon = newLC.MaLuaChon;
+                        chlc.CauTraLoi = dapan;
+                        db.CauHoi_LuaChon.Add(chlc);
+                    }    
+                    else
+                    {
+                        chlc.CauTraLoi = dapan;
+                        db.Entry(chlc).State = EntityState.Modified;
+                    }
+                    db.SaveChanges();
                 }
             }
-            db.SaveChanges();
+            
         }
 
         [HttpPost]
