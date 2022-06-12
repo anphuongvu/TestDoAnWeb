@@ -34,6 +34,7 @@
         <EntityTypeShape EntityType="QLThiTracNghiemOnlModel.DeThis_Chitiets" Width="1.5" PointX="6.25" PointY="5.125" />
         <AssociationConnector Association="QLThiTracNghiemOnlModel.FK_Dethis_Chitiets1" />
         <AssociationConnector Association="QLThiTracNghiemOnlModel.FK_Dethis_Chitiets" />
+        <AssociationConnector Association="QLThiTracNghiemOnlModel.FK_DeThi_CauHoi" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

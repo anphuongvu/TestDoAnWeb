@@ -195,7 +195,7 @@
     <Compile Include="Models\PhanQuyen.cs">
       <DependentUpon>ThiTN.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sysdiagram1.cs">
+    <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>ThiTN.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TaiKhoan.cs">

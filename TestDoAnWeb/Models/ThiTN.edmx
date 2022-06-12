@@ -95,7 +95,7 @@
             <PropertyRef Name="MaLuaChon" />
           </Key>
           <Property Name="MaLuaChon" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="NoiDung" Type="nchar" MaxLength="10" />
+          <Property Name="NoiDung" Type="nchar" MaxLength="1000" />
         </EntityType>
         <EntityType Name="PhanQuyens">
           <Key>
@@ -300,7 +300,7 @@
             <PropertyRef Name="MaLuaChon" />
           </Key>
           <Property Name="MaLuaChon" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NoiDung" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="NoiDung" Type="String" MaxLength="1000" FixedLength="true" Unicode="true" />
           <NavigationProperty Name="BaiLams" Relationship="Self.FK_BaiLam_LuaChon" FromRole="LuaChons" ToRole="BaiLams" />
           <NavigationProperty Name="CauHoi_LuaChon" Relationship="Self.FK_CauHoi_LuaChon_LuaChon" FromRole="LuaChons" ToRole="CauHoi_LuaChon" />
         </EntityType>

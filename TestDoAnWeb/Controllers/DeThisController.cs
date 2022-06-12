@@ -41,7 +41,13 @@ namespace TestDoAnWeb.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.cauhois = db.CauHois.Where(item => item.MaDeThi == id).ToList();
+            var dtct = db.DeThis_Chitiets.Where(c => c.IdDeThi == id).ToList();
+            List < CauHois > cauhois = new List<CauHois>();
+            foreach (DeThis_Chitiets ct in dtct)
+            {
+                cauhois.Add(ct.CauHois);
+            }
+            ViewBag.cauhois = cauhois;
             ViewBag.quest_idx = 0;
             return View(deThi);
         }
@@ -50,7 +56,11 @@ namespace TestDoAnWeb.Controllers
         {
             DeThi deThi = db.DeThis.Find(maDeThi);
             List<DeThis_Chitiets> dtcts = deThi.DeThis_Chitiets.ToList();
-            List<CauHois> cauHois = db.CauHois.Where(item => item.MaDeThi == maDeThi).ToList();
+            List<CauHois> cauHois = new List<CauHois>();
+            foreach (DeThis_Chitiets ct in dtcts)
+            {
+                cauHois.Add(ct.CauHois);
+            }
             List<BaiLam> baiLams = db.BaiLams.Where(bl => bl.MaHocSinh == maHocSinh).ToList();
 
             //tinh diem
@@ -71,7 +81,11 @@ namespace TestDoAnWeb.Controllers
         {
             DeThi deThi = db.DeThis.Find(maDeThi);
             List<DeThis_Chitiets> dtcts = deThi.DeThis_Chitiets.ToList();
-            List<CauHois> cauHois = db.CauHois.Where(item => item.MaDeThi == maDeThi).ToList();
+            List<CauHois> cauHois = new List<CauHois>();
+            foreach (DeThis_Chitiets ct in dtcts)
+            {
+                cauHois.Add(ct.CauHois);
+            }
             List<BaiLam> baiLams = db.BaiLams.Where(bl => bl.MaHocSinh == maHocSinh).ToList();
             ViewBag.cauhois = cauHois;
             ViewBag.baiLams = baiLams;
