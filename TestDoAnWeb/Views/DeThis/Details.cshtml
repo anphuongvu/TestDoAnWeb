@@ -199,21 +199,21 @@
 
                             }
 
-                            <div class="row text-right" id="SHowButton" style="margin-right: 15px; margin-left: 15px;">
+                            <div class="row text-right" id="ShowButton" style="margin-right: 15px; margin-left: 15px;">
                                 @for (int i = 1; i < cauhois.Count; i++)
                                 {
-                                    <input class="hidden btn btn-info" type="button" id="pre_btn_@cauhois[i].MaCauHoi" value="Trước" onclick="ShowPreData(@cauhois[i].MaCauHoi)" />
+                                    <input class="hidden btn btn-info" type="button" id="pre_btn_@cauhois[i].MaCauHoi" value="Trước" onclick="ShowPreData(@cauhois[i].MaCauHoi, @cauhois[i-1].MaCauHoi)" />
 
                                 }
                                 @for (int i = 0; i < cauhois.Count - 1; i++)
                                 {
                                     if (i == ViewBag.quest_idx)
                                     {
-                                        <input class="btn btn-info" type="button" id="next_btn_@cauhois[i].MaCauHoi" value="Tiếp" onclick="ShowNextData(@cauhois[i].MaCauHoi)" />
+                                        <input class="btn btn-info" type="button" id="next_btn_@cauhois[i].MaCauHoi" value="Tiếp" onclick="ShowNextData(@cauhois[i].MaCauHoi, @cauhois[i+1].MaCauHoi)" />
                                     }
                                     else
                                     {
-                                        <input class="hidden btn btn-info" type="button" id="next_btn_@cauhois[i].MaCauHoi" value="Tiếp" onclick="ShowNextData(@cauhois[i].MaCauHoi)" />
+                                        <input class="hidden btn btn-info" type="button" id="next_btn_@cauhois[i].MaCauHoi" value="Tiếp" onclick="ShowNextData(@cauhois[i].MaCauHoi, @cauhois[i+1].MaCauHoi)" />
                                     }
                                 }
                             </div>
@@ -330,40 +330,40 @@
 
         //pauseBtn.addEventListener('click', pauseTimer);
 
-        function ShowNextData(maCauHoi)  //number will get the clicked button's number
+        function ShowNextData(maCauHoi, maTiep)  //number will get the clicked button's number
         {
 
             var current_quest = $("#quest_" + maCauHoi);
-            var next_quest = $("#quest_" + (maCauHoi + 1));
+            var next_quest = $("#quest_" + (maTiep));
             current_quest.addClass("hidden");
             next_quest.removeClass("hidden");
 
             var current_next_btn = $("#next_btn_" + maCauHoi);
-            var next_next_btn = $("#next_btn_" + (maCauHoi + 1));
+            var next_next_btn = $("#next_btn_" + (maTiep));
             current_next_btn.addClass("hidden");
             next_next_btn.removeClass("hidden");
 
             var current_pre_btn = $("#pre_btn_" + (maCauHoi));
-            var next_pre_btn = $("#pre_btn_" + (maCauHoi+1));
+            var next_pre_btn = $("#pre_btn_" + (maTiep));
             current_pre_btn.addClass("hidden");
             next_pre_btn.removeClass("hidden");
         }
 
-        function ShowPreData(maCauHoi)  //number will get the clicked button's number
+        function ShowPreData(maCauHoi, maTruoc)  //number will get the clicked button's number
         {
 
             var current_quest = $("#quest_" + maCauHoi);
-            var pre_quest = $("#quest_" + (maCauHoi - 1));
+            var pre_quest = $("#quest_" + (maTruoc));
             current_quest.addClass("hidden");
             pre_quest.removeClass("hidden");
 
             var current_next_btn = $("#next_btn_" + maCauHoi);
-            var pre_next_btn = $("#next_btn_" + (maCauHoi - 1));
+            var pre_next_btn = $("#next_btn_" + (maTruoc));
             current_next_btn.addClass("hidden");
             pre_next_btn.removeClass("hidden");
 
             var current_pre_btn = $("#pre_btn_" + (maCauHoi));
-            var pre_pre_btn = $("#pre_btn_" + (maCauHoi - 1));
+            var pre_pre_btn = $("#pre_btn_" + (maTruoc));
             current_pre_btn.addClass("hidden");
             pre_pre_btn.removeClass("hidden");
         }

@@ -96,7 +96,7 @@
                                     @foreach (CauHoi_LuaChon chlc in cauhois[i].CauHoi_LuaChon)
                                     {
                                         <div class="form-check col-md-offset-2 col-md-10">
-                                            @if (baiLams.Where(bl => bl.MaCauHoi == cauhois[i].MaCauHoi).FirstOrDefault().MaLuaChon == chlc.MaLuaChon)
+                                            @if (baiLams.Where(bl => bl.MaCauHoi == cauhois[i].MaCauHoi).FirstOrDefault() != null && baiLams.Where(bl => bl.MaCauHoi == cauhois[i].MaCauHoi).FirstOrDefault().MaLuaChon == chlc.MaLuaChon)
                                             {
                                                 if (chlc.CauTraLoi)
                                                 {
@@ -135,7 +135,7 @@
 
                             }
 
-                            <div class="row text-right" id="SHowButton" style="margin-right: 15px; margin-left: 15px;">
+                            <div class="row text-right" id="ShowButton" style="margin-right: 15px; margin-left: 15px;">
                                 @for (int i = 1; i < cauhois.Count; i++)
                                 {
                                     <input class="hidden btn btn-info" type="button" id="pre_btn_@cauhois[i].MaCauHoi" value="Trước" onclick="ShowPreData(@cauhois[i].MaCauHoi)" />
