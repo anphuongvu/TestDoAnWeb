@@ -50,7 +50,7 @@ namespace TestDoAnWeb.Areas.GiangVien.Controllers
                 {
                     dt.SoCauHoi = dt.DeThis_Chitiets.Count;
                     db.Entry(dt).State = EntityState.Modified;
-                    db.SaveChangesAsync();
+                    db.SaveChanges();
                 }
                 return Json(new { code = 200, msg = "Thêm mới câu hỏi thành công!" }, JsonRequestBehavior.AllowGet);
             }
