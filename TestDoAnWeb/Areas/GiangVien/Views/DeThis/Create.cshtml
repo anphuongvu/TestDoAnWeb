@@ -17,7 +17,7 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.LabelFor(model => model.TenMonThi, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2" for="TenMonThi">Tên môn thi</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.TenMonThi, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.TenMonThi, "", new { @class = "text-danger" })
@@ -25,23 +25,23 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.NgayThi, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2" for="NgayThi">Ngày thi</label>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.NgayThi, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.TextBoxFor(model => model.NgayThi, new { @type = "date", @class = "datepicker", htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.NgayThi, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group hidden">
-            @Html.LabelFor(model => model.SoCauHoi, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2" for="SoCauHoi">Số câu hỏi</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.SoCauHoi, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.SoCauHoi, "", new { @class = "text-danger"})
+                @Html.ValidationMessageFor(model => model.SoCauHoi, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.MaKhoaHoc, "MaKhoaHoc", htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2" for="MaKhoaHoc">Mã khóa học</label>
             <div class="col-md-10">
                 @Html.DropDownList("MaKhoaHoc", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.MaKhoaHoc, "", new { @class = "text-danger" })
@@ -49,15 +49,16 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.ThoiHanDeThi, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2" for="ThoiHanDeThi">Thời hạn đề thi</label>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.ThoiHanDeThi, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.TextBoxFor(model => model.ThoiHanDeThi, new { @type = "date", @class = "datepicker", htmlAttributes = new { @class = "form-control" } })
+                @*@Html.EditorFor(model => model.ThoiHanDeThi, new { htmlAttributes = new { @class = "form-control" } })*@
                 @Html.ValidationMessageFor(model => model.ThoiHanDeThi, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.ThoiGianLamBai, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2" for="ThoiGianLamBai">Thời gian làm bài</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.ThoiGianLamBai, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.ThoiGianLamBai, "", new { @class = "text-danger" })
@@ -66,14 +67,14 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Tạo đề" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Quay lại", "Index")
 </div>
 
 @section Scripts {
