@@ -27,6 +27,17 @@ namespace TestDoAnWeb.Controllers
             return View(await deThis.ToListAsync());
         }
 
+        public async Task<ActionResult> TimKiem(string searchValue)
+        {
+            if (Session["TaiKhoan"] == null)
+            {
+                return RedirectToAction("Login", "Default");
+            }
+            var deThis = db.DeThis.Where(dt => dt.TenMonThi.Contains(searchValue) || (dt.KhoaHoc != null && dt.KhoaHoc.TenKhoaHoc.Contains(searchValue))).Include(d => d.KhoaHoc);
+            return View(await deThis.ToListAsync());
+        }
+
+
         // GET: DeThis/Details/5
         public async Task<ActionResult> Details(int? id)
         {

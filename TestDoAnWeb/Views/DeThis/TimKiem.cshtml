@@ -1,0 +1,66 @@
+﻿@model IEnumerable<TestDoAnWeb.Models.DeThi>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Danh sách bài thi</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Tên Môn Thi
+            @*@Html.DisplayNameFor(model => model.TenMonThi)*@
+        </th>
+        <th>
+            Ngày thi
+            @*@Html.DisplayNameFor(model => model.NgayThi)*@
+        </th>
+        <th>
+            Số câu hỏi
+            @*@Html.DisplayNameFor(model => model.SoCauHoi)*@
+        </th>
+        <th>
+            Thời hạn đề thi
+            @*@Html.DisplayNameFor(model => model.ThoiHanDeThi)*@
+        </th>
+        <th>
+            Thời gian làm bài
+            @*@Html.DisplayNameFor(model => model.ThoiGianLamBai)*@
+        </th>
+        <th>
+            Tên khóa học
+            @*@Html.DisplayNameFor(model => model.KhoaHoc.TenKhoaHoc)*@
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TenMonThi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NgayThi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SoCauHoi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ThoiHanDeThi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ThoiGianLamBai)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.KhoaHoc.TenKhoaHoc)
+        </td>
+        <td>
+            <a href="/Dethis/Details/@item.MaDeThi" class="btn btn-default">Làm Bài</a>
+
+        </td>
+    </tr>
+}
+
+</table>

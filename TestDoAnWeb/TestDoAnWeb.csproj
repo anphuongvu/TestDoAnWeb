@@ -195,9 +195,7 @@
     <Compile Include="Models\PhanQuyen.cs">
       <DependentUpon>ThiTN.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sysdiagram.cs">
-      <DependentUpon>ThiTN.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Models\sysdiagram1.cs" />
     <Compile Include="Models\TaiKhoan.cs">
       <DependentUpon>ThiTN.tt</DependentUpon>
     </Compile>
@@ -351,6 +349,7 @@
     <Content Include="Views\Default\Login.cshtml" />
     <Content Include="Views\DeThis\BaiLam.cshtml" />
     <Content Include="TestDoAnWeb.csproj" />
+    <Content Include="Views\DeThis\TimKiem.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
